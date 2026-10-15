@@ -4,658 +4,724 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="light only">
-<meta name="supported-color-schemes" content="light">
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: dark)">
-<title>Colégio Cristão Ponta Grossa — Formação forte no conhecimento, firme nos valores</title>
-<meta name="description" content="Escola cristã bilíngue em Ponta Grossa. Educação Infantil e Ensino Fundamental com segurança física, segurança emocional e valores cristãos.">
+<title>Colégio Cristão Ponta Grossa — Ensino bilíngue com princípios cristãos</title>
+<meta name="description" content="Escola cristã bilíngue na Vila Estrela, Ponta Grossa. Da Educação Infantil ao Ensino Fundamental, com turmas reduzidas, segurança física e emocional e formação de caráter. Matrículas abertas.">
+<meta property="og:title" content="Colégio Cristão Ponta Grossa">
+<meta property="og:description" content="Ensino bilíngue todos os dias, turmas de ~16 alunos e educação por princípios cristãos. Agende uma visita.">
+<meta property="og:image" content="img/foto-hero.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" href="img/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --navy: #0c2a81;       /* real brand royal blue, sampled from matrix site */
-    --navy-deep: #081d5c;
-    --gold: #ffd900;       /* real brand yellow, sampled from matrix site */
-    --gold-deep: #e0b800;
-    --cream: #ffffff;
-    --paper: #f4f6fb;
-    --ink: #16193a;
-    --slate: #6b7280;
-    --line: rgba(12,42,129,0.14);
-    --radius: 8px;
-    color-scheme: light only;
-  }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth; background:#ffffff !important; color-scheme:light only;}
-  @media (prefers-color-scheme: dark){
-    html, body{ background:#ffffff !important; color:#16193a !important; }
-    section, header, footer, main{ background-color: inherit; }
-  }
-  body{
-    margin:0;
-    background:var(--cream);
-    color:var(--ink);
-    font-family:"Work Sans", -apple-system, sans-serif;
-    font-size:16px;
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-  }
-  h1,h2,h3,.serif{
-    font-family:"Poppins", Georgia, sans-serif;
-    font-weight:600;
-    line-height:1.12;
-    margin:0;
-    color:var(--navy);
-  }
-  a{color:inherit;}
-  img,svg{display:block;max-width:100%;}
-  .wrap{
-    max-width:1120px;
-    margin:0 auto;
-    padding:0 28px;
-  }
-  .eyebrow{
-    font-family:"Poppins", sans-serif;
-    font-style:italic;
-    font-weight:500;
-    font-size:1.02rem;
-    color:var(--gold-deep);
-    margin-bottom:10px;
-  }
-  /* ---------- header ---------- */
-  header{
-    position:sticky; top:0; z-index:50;
-    background:#ffffff;
-    backdrop-filter:blur(6px);
-    border-bottom:1px solid var(--line);
-  }
-  .nav{
-    display:flex; align-items:center; justify-content:space-between;
-    padding:16px 28px;
-    max-width:1120px; margin:0 auto;
-  }
-  .brand{display:flex; align-items:center; gap:12px; text-decoration:none;}
-  .brand-mark{width:40px;height:40px;flex:none;}
-  .brand-text{font-family:"Poppins",sans-serif; font-weight:600; font-size:1.05rem; color:var(--navy); line-height:1.15;}
-  .brand-text span{display:block; font-family:"Work Sans",sans-serif; font-weight:500; font-size:0.68rem; letter-spacing:0.02em; color:var(--slate);}
-  nav.links{display:flex; font-size:0.94rem;}
-  nav.links a{text-decoration:none; color:var(--ink); position:relative; margin-right:30px;}
-  nav.links a:last-child{margin-right:0;}
-  nav.links a:hover{color:var(--navy);}
-  .btn{
-    display:inline-flex; align-items:center; gap:8px;
-    padding:12px 22px;
-    background:var(--navy); color:var(--cream);
-    border-radius:var(--radius);
-    text-decoration:none;
-    font-weight:500; font-size:0.92rem;
-    border:1px solid var(--navy);
-    transition:background .15s ease, color .15s ease;
-  }
-  .btn:hover{background:var(--navy-deep);}
-  .btn.gold{background:var(--gold); border-color:var(--gold); color:var(--navy-deep); font-weight:600;}
-  .btn.gold:hover{background:var(--gold-deep); color:var(--cream);}
-  .btn.ghost{background:transparent; color:var(--navy); border-color:var(--navy);}
-  .btn.ghost:hover{background:var(--navy); color:var(--cream);}
-  .menu-toggle{display:none; background:none; border:none; cursor:pointer; padding:6px;}
-  .menu-toggle span{display:block; width:24px; height:2px; background:var(--navy); margin:5px 0;}
+/* ============ TOKENS ============ */
+:root{
+  --navy:#0c2a81;
+  --navy-deep:#061a57;
+  --navy-ink:#04123d;
+  --gold:#ffd900;
+  --gold-deep:#e3bb00;
+  --paper:#f6f7fb;
+  --white:#fff;
+  --ink:#121633;
+  --slate:#5f6885;
+  --line:rgba(12,42,129,.12);
+  --ease:cubic-bezier(.22,1,.36,1);
+  --maxw:1180px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:#fff}
+body{
+  font-family:'Outfit',system-ui,sans-serif;
+  color:var(--ink);background:#fff;line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{line-height:1.08;font-weight:700;letter-spacing:-.02em}
+.serif{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-style:italic;letter-spacing:0}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px}
 
-  /* ---------- hero: full-bleed photo + duotone overlay + yellow band + floating CTA (matches network brand) ---------- */
-  .hero-photo{
-    position:relative;
-    min-height:78vw;
-    max-height:640px;
-    background-size:cover;
-    background-position:center 55%;
-    background-color:var(--navy);
-    display:flex;
-    align-items:flex-end;
-  }
-  .hero-photo::before{
-    content:"";
-    position:absolute; inset:0;
-    background:linear-gradient(180deg, rgba(12,42,129,0.10) 0%, rgba(12,42,129,0.45) 55%, rgba(8,29,92,0.92) 100%);
-  }
-  .hero-photo .hero-text{
-    position:relative; z-index:1;
-    padding:32px 24px 44px;
-    max-width:760px;
-    margin:0 auto;
-    width:100%;
-    box-sizing:border-box;
-  }
-  .hero-eyebrow{
-    text-transform:uppercase;
-    letter-spacing:0.05em;
-    color:var(--gold);
-    font-weight:700;
-    font-size:0.82rem;
-    margin-bottom:12px;
-  }
-  .hero-photo h1{
-    font-size:clamp(2rem, 6.2vw, 3.2rem);
-    line-height:1.04;
-    letter-spacing:-0.005em;
-    text-transform:uppercase;
-    color:#fff;
-    font-weight:800;
-    max-width:15ch;
-  }
-  .hero-photo h1 .accent{color:var(--gold);}
-  .hero-photo p.lead{
-    margin-top:18px;
-    max-width:48ch;
-    color:#e7ebf7;
-    font-size:1.02rem;
-  }
+/* ============ MOTION PRIMITIVES ============ */
+[data-rev]{opacity:0;transform:translateY(34px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+[data-rev].in{opacity:1;transform:none}
+[data-rev][data-dir="left"]{transform:translateX(-44px)}
+[data-rev][data-dir="right"]{transform:translateX(44px)}
+[data-rev][data-dir="zoom"]{transform:scale(.93)}
+[data-rev].in[data-dir]{transform:none}
+.stagger>*{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.stagger.in>*{opacity:1;transform:none}
+.stagger.in>*:nth-child(1){transition-delay:.05s}
+.stagger.in>*:nth-child(2){transition-delay:.15s}
+.stagger.in>*:nth-child(3){transition-delay:.25s}
+.stagger.in>*:nth-child(4){transition-delay:.35s}
+.stagger.in>*:nth-child(5){transition-delay:.45s}
+.stagger.in>*:nth-child(6){transition-delay:.55s}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition-duration:.01ms!important}
+  [data-rev],.stagger>*{opacity:1!important;transform:none!important}
+}
 
-  /* yellow crest band, mirrors the network's "Mais Completo" band */
-  .hero-band-yellow{
-    background:var(--gold);
-    text-align:center;
-    padding:38px 24px 30px;
-    position:relative;
-  }
-  .hero-band-yellow .crest{
-    width:96px; height:96px; margin:0 auto 16px;
-    border-radius:50%; background:#fff; padding:5px;
-    box-shadow:0 10px 26px -6px rgba(12,42,129,0.4);
-  }
-  .hero-band-yellow .crest img{width:100%; height:100%; object-fit:contain; border-radius:50%;}
-  .hero-band-yellow h2{
-    color:var(--navy); font-weight:800; text-transform:uppercase;
-    font-size:clamp(1.2rem,3vw,1.6rem); letter-spacing:0.01em;
-  }
-  .hero-band-yellow p{
-    color:var(--navy-deep); font-weight:600; margin-top:10px; font-size:0.98rem;
-  }
-  .hero-band-yellow .stat-row{
-    margin-top:26px; display:flex; justify-content:center; flex-wrap:wrap; gap:0 34px;
-  }
-  .hero-band-yellow .stat{margin-bottom:10px;}
-  .hero-band-yellow .stat b{
-    display:block; font-family:"Poppins",sans-serif; font-weight:800; font-size:1.3rem; color:var(--navy);
-  }
-  .hero-band-yellow .stat span{font-size:0.76rem; color:var(--navy-deep); opacity:0.85;}
+/* ============ PRELOADER ============ */
+#boot{
+  position:fixed;inset:0;z-index:9999;background:var(--navy-deep);
+  display:flex;align-items:center;justify-content:center;
+  transition:opacity .7s var(--ease),visibility .7s;
+}
+#boot.done{opacity:0;visibility:hidden}
+#boot img{width:92px;animation:bootPulse 1.5s var(--ease) infinite}
+@keyframes bootPulse{0%,100%{transform:scale(.9);opacity:.75}50%{transform:scale(1.05);opacity:1}}
 
-  /* floating CTA button, half in/half out of the yellow band like the network's "Agende uma visita" */
-  .hero-cta-float{
-    display:flex; flex-direction:column; align-items:center; gap:10px;
-    margin-top:-26px; position:relative; z-index:2; padding-bottom:34px;
-  }
-  .hero-cta-float .btn{
-    padding:16px 34px; font-size:1.02rem; font-weight:700;
-    box-shadow:0 16px 32px -10px rgba(12,42,129,0.55);
-  }
-  .hero-cta-float a.text-link{color:var(--navy); font-size:0.9rem; font-weight:600; text-decoration:underline;}
+/* ============ HEADER ============ */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  transition:background .4s var(--ease),box-shadow .4s var(--ease),padding .4s var(--ease);
+  padding:18px 0;
+}
+header.solid{background:rgba(255,255,255,.95);backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line);padding:10px 0}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:20px;max-width:var(--maxw);margin:0 auto;padding:0 26px}
+.brand{display:flex;align-items:center;gap:11px}
+.brand img{width:44px;transition:width .4s var(--ease)}
+header.solid .brand img{width:38px}
+.brand-txt{font-weight:700;font-size:1.02rem;color:#fff;line-height:1.1;transition:color .4s}
+.brand-txt small{display:block;font-weight:400;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;opacity:.7}
+header.solid .brand-txt{color:var(--navy)}
+.links{display:flex;gap:28px;font-size:.93rem;font-weight:500}
+.links a{color:rgba(255,255,255,.88);position:relative;padding:4px 0;transition:color .3s}
+header.solid .links a{color:var(--ink)}
+.links a::after{content:'';position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--gold);transition:width .35s var(--ease)}
+.links a:hover::after{width:100%}
+.cta-top{
+  background:var(--gold);color:var(--navy-deep);font-weight:700;font-size:.88rem;
+  padding:11px 22px;border-radius:100px;white-space:nowrap;
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease);
+}
+.cta-top:hover{transform:translateY(-2px);box-shadow:0 10px 22px -8px rgba(12,42,129,.6)}
+.burger{display:none;background:none;border:0;cursor:pointer;padding:8px}
+.burger i{display:block;width:24px;height:2px;background:#fff;margin:5px 0;transition:.3s var(--ease)}
+header.solid .burger i{background:var(--navy)}
+.burger.x i:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger.x i:nth-child(2){opacity:0}
+.burger.x i:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
-  /* ---------- historia ---------- */
-  .historia-grid{
-    display:grid;
-    grid-template-columns:0.9fr 1.1fr;
-    gap:56px;
-    align-items:center;
-  }
-  .historia-photo{
-    border-radius:4px; overflow:hidden;
-    box-shadow:0 20px 40px -18px rgba(12,42,129,0.35);
-  }
-  .historia-photo img{width:100%; height:100%; object-fit:cover; aspect-ratio:4/5;}
-  .historia-copy h2{font-size:clamp(1.6rem,3vw,2.1rem); max-width:16ch; margin-bottom:18px;}
-  .historia-copy p{color:var(--slate); margin:0 0 16px; max-width:52ch;}
-  .historia-copy p:last-child{margin-bottom:0;}
+/* ============ HERO ============ */
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;background:var(--navy-deep)}
+.hero-bg{position:absolute;inset:-8% 0 -8% 0;background:url('img/foto-hero.jpg') center 60%/cover no-repeat;will-change:transform}
+.hero::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(4,18,61,.72) 0%,rgba(4,18,61,.35) 35%,rgba(6,26,87,.88) 100%);
+}
+.hero-in{position:relative;z-index:3;width:100%;max-width:var(--maxw);margin:0 auto;padding:140px 26px 70px}
+.kicker{
+  display:inline-flex;align-items:center;gap:9px;
+  background:rgba(255,217,0,.14);border:1px solid rgba(255,217,0,.4);
+  color:var(--gold);font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  padding:8px 16px;border-radius:100px;margin-bottom:22px;
+}
+.kicker .dot{width:7px;height:7px;border-radius:50%;background:var(--gold);animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(255,217,0,.6)}50%{opacity:.5;box-shadow:0 0 0 7px rgba(255,217,0,0)}}
+.hero h1{font-size:clamp(2.4rem,7vw,4.9rem);color:#fff;font-weight:800;max-width:17ch;text-transform:uppercase}
+.hero h1 .gold{color:var(--gold)}
+.hero h1 .serif{text-transform:none;font-weight:400;color:#fff}
+.hero p.lead{margin-top:22px;max-width:50ch;color:#dde3f5;font-size:clamp(1rem,1.6vw,1.14rem)}
+.hero-btns{display:flex;flex-wrap:wrap;gap:13px;margin-top:34px}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;padding:16px 32px;border-radius:100px;
+  font-weight:700;font-size:.97rem;transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .3s;
+}
+.btn-gold{background:var(--gold);color:var(--navy-deep);box-shadow:0 14px 30px -12px rgba(255,217,0,.7)}
+.btn-gold:hover{transform:translateY(-3px);box-shadow:0 20px 38px -12px rgba(255,217,0,.85)}
+.btn-ghost{background:rgba(255,255,255,.08);color:#fff;border:1.5px solid rgba(255,255,255,.4);backdrop-filter:blur(6px)}
+.btn-ghost:hover{background:#fff;color:var(--navy-deep);transform:translateY(-3px)}
+.btn-navy{background:var(--navy);color:#fff}
+.btn-navy:hover{background:var(--navy-deep);transform:translateY(-3px)}
+.scrolly{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:4;color:rgba(255,255,255,.65);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;text-align:center}
+.scrolly i{display:block;width:1px;height:38px;background:linear-gradient(var(--gold),transparent);margin:9px auto 0;animation:drop 1.9s var(--ease) infinite}
+@keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 
-  /* ---------- marquee strip ---------- */
-  .strip{
-    background:var(--navy);
-    color:var(--cream);
-    padding:12px 0;
-    overflow:hidden;
-    white-space:nowrap;
-  }
-  .strip .track{
-    display:inline-block;
-    animation:scroll 26s linear infinite;
-    font-family:"Poppins", sans-serif;
-    font-style:italic;
-    font-size:1rem;
-    letter-spacing:0.01em;
-  }
-  .strip .track span{margin:0 28px; color:var(--gold);}
-  @keyframes scroll{
-    from{transform:translateX(0);}
-    to{transform:translateX(-50%);}
-  }
-  @media (prefers-reduced-motion: reduce){
-    .strip .track{animation:none;}
-  }
+/* ============ MARQUEE ============ */
+.marq{background:var(--gold);padding:15px 0;overflow:hidden;white-space:nowrap}
+.marq-t{display:inline-block;animation:slide 32s linear infinite;font-weight:800;font-size:1.02rem;color:var(--navy-deep);text-transform:uppercase;letter-spacing:.02em}
+.marq-t span{margin:0 14px}
+.marq-t b{color:var(--navy);opacity:.45;margin:0 4px}
+@keyframes slide{to{transform:translateX(-50%)}}
 
-  /* ---------- section basics ---------- */
-  section{padding:88px 0; background:#ffffff;}
-  section.tight{padding:70px 0;}
-  .section-head{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:40px;
-    align-items:end;
-    margin-bottom:52px;
-  }
-  .section-head h2{font-size:clamp(1.7rem,3vw,2.3rem); max-width:14ch;}
-  .section-head p{color:var(--slate); max-width:42ch; margin:0;}
+/* ============ STATS ============ */
+.stats{background:var(--navy);color:#fff;padding:62px 0}
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;text-align:center}
+.stat b{display:block;font-size:clamp(2rem,4.4vw,3rem);font-weight:800;color:var(--gold);line-height:1}
+.stat span{display:block;margin-top:8px;font-size:.86rem;color:#c3cbe6;letter-spacing:.02em}
 
-  /* ---------- pillars ---------- */
-  .pillars{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    border-top:1px solid var(--line);
-  }
-  .pillar{
-    padding:34px 26px 34px 0;
-    border-right:1px solid var(--line);
-  }
-  .pillar:last-child{border-right:none;}
-  .pillar .num{
-    font-family:"Poppins",sans-serif; font-style:italic; color:var(--gold-deep);
-    font-size:0.95rem; margin-bottom:22px; display:block;
-  }
-  .pillar h3{font-size:1.12rem; margin-bottom:10px;}
-  .pillar p{color:var(--slate); font-size:0.93rem; margin:0;}
+/* ============ SECTIONS ============ */
+section{padding:104px 0}
+.sec-head{max-width:720px;margin-bottom:56px}
+.sec-tag{display:block;font-size:.76rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:14px}
+.sec-head h2{font-size:clamp(1.9rem,4.2vw,2.9rem);color:var(--navy)}
+.sec-head p{margin-top:16px;color:var(--slate);font-size:1.04rem}
+.center{margin-left:auto;margin-right:auto;text-align:center}
 
-  /* ---------- segments (numbered sequence) ---------- */
-  .segments{background:var(--paper);}
-  .seg-list{border-top:1px solid var(--line);}
-  .seg-row{
-    display:grid;
-    grid-template-columns:90px 1fr 1.3fr;
-    gap:28px;
-    padding:30px 0;
-    border-bottom:1px solid var(--line);
-    align-items:start;
-  }
-  .seg-row .idx{
-    font-family:"Poppins",sans-serif; font-size:2rem; color:var(--gold-deep); font-weight:500;
-  }
-  .seg-row h3{font-size:1.2rem;}
-  .seg-row p{color:var(--slate); margin:0; max-width:52ch;}
-  .seg-row.future{opacity:0.75;}
-  .badge{
-    display:inline-block; margin-top:8px;
-    font-size:0.72rem; letter-spacing:0.02em; color:var(--gold-deep);
-    border:1px solid var(--gold); border-radius:20px; padding:3px 12px;
-  }
+/* HISTORIA */
+.hist{background:var(--paper)}
+.hist-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:62px;align-items:center}
+.hist-ph{position:relative;border-radius:18px;overflow:hidden;box-shadow:0 34px 60px -28px rgba(12,42,129,.5)}
+.hist-ph img{width:100%;aspect-ratio:4/5;object-fit:cover;transition:transform 1.1s var(--ease)}
+.hist-ph:hover img{transform:scale(1.05)}
+.hist-ph .tagline{
+  position:absolute;left:0;right:0;bottom:0;padding:50px 22px 20px;
+  background:linear-gradient(transparent,rgba(4,18,61,.9));color:#fff;font-weight:600;font-size:.92rem;
+}
+.hist-copy h2{font-size:clamp(1.8rem,3.6vw,2.6rem);color:var(--navy);margin-bottom:20px;max-width:17ch}
+.hist-copy p{color:var(--slate);margin-bottom:16px;max-width:54ch}
+.quote{
+  margin:26px 0 0;padding:20px 24px;border-left:3px solid var(--gold);
+  background:#fff;border-radius:0 12px 12px 0;color:var(--navy);font-size:1.08rem;
+}
 
-  /* ---------- life at school gallery (illustrated) ---------- */
-  .life-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:2px;
-    background:var(--line);
-    border:1px solid var(--line);
-  }
-  .life-card{
-    background-color:var(--navy);
-    background-size:cover;
-    background-position:center;
-    color:var(--cream);
-    aspect-ratio:3/4;
-    padding:20px;
-    display:flex;
-    flex-direction:column;
-    justify-content:flex-end;
-    position:relative;
-    overflow:hidden;
-  }
-  .life-card .tag{font-size:0.72rem; color:var(--gold); font-weight:600; letter-spacing:0.02em;}
-  .life-card h4{font-family:"Poppins",sans-serif; font-weight:500; font-size:1.02rem; margin-top:6px; color:var(--cream);}
+/* PILARES */
+.pil-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.pil{
+  background:#fff;border:1px solid var(--line);border-radius:18px;padding:34px 26px 30px;
+  position:relative;overflow:hidden;transition:transform .45s var(--ease),box-shadow .45s var(--ease),border-color .45s;
+}
+.pil::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);
+  transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease);
+}
+.pil:hover{transform:translateY(-8px);box-shadow:0 28px 50px -26px rgba(12,42,129,.42);border-color:transparent}
+.pil:hover::before{transform:scaleX(1)}
+.pil .ic{
+  width:54px;height:54px;border-radius:14px;background:linear-gradient(135deg,var(--navy),var(--navy-deep));
+  display:flex;align-items:center;justify-content:center;margin-bottom:20px;
+  transition:transform .5s var(--ease);
+}
+.pil:hover .ic{transform:rotate(-8deg) scale(1.08)}
+.pil .ic svg{width:26px;height:26px;stroke:var(--gold);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.pil h3{font-size:1.14rem;color:var(--navy);margin-bottom:10px}
+.pil p{font-size:.93rem;color:var(--slate)}
 
-  /* ---------- values band ---------- */
-  .values{
-    background:var(--navy);
-    color:var(--cream);
-  }
-  .values .section-head h2, .values .section-head p{color:var(--cream);}
-  .values .section-head p{color:#c7cee3;}
-  .value-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:34px;
-  }
-  .value-grid div{border-left:2px solid var(--gold); padding-left:18px;}
-  .value-grid h3{color:var(--cream); font-size:1.05rem; margin-bottom:8px;}
-  .value-grid p{color:#c7cee3; font-size:0.92rem; margin:0;}
+/* SEGMENTOS — timeline */
+.seg{background:var(--navy-ink);color:#fff;position:relative;overflow:hidden}
+.seg::before{
+  content:'';position:absolute;top:-180px;right:-180px;width:560px;height:560px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,217,0,.13),transparent 68%);
+}
+.seg .sec-head h2{color:#fff}
+.seg .sec-head p{color:#aab3d4}
+.tl{position:relative;padding-left:62px}
+.tl::before{
+  content:'';position:absolute;left:21px;top:8px;bottom:8px;width:2px;background:rgba(255,255,255,.14);
+}
+.tl-line{position:absolute;left:21px;top:8px;width:2px;background:var(--gold);height:0;transition:height 1.6s var(--ease)}
+.tl.in .tl-line{height:calc(100% - 16px)}
+.tl-row{position:relative;padding:28px 0;border-bottom:1px solid rgba(255,255,255,.1)}
+.tl-row:last-child{border-bottom:0}
+.tl-row .node{
+  position:absolute;left:-52px;top:32px;width:20px;height:20px;border-radius:50%;
+  background:var(--navy-ink);border:2px solid var(--gold);
+  display:flex;align-items:center;justify-content:center;
+}
+.tl-row .node::after{content:'';width:7px;height:7px;border-radius:50%;background:var(--gold)}
+.tl-row h3{font-size:1.35rem;color:#fff;margin-bottom:6px}
+.tl-row .yrs{font-size:.8rem;color:var(--gold);font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;display:block}
+.tl-row p{color:#aab3d4;max-width:60ch;font-size:.97rem}
+.pill{display:inline-block;margin-top:12px;font-size:.74rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--navy-ink);background:var(--gold);padding:5px 13px;border-radius:100px}
 
-  /* ---------- rede (network) ---------- */
-  .rede-list{
-    display:flex; flex-wrap:wrap;
-    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
-    padding:26px 0;
-    font-family:"Poppins",sans-serif; font-size:1.05rem; color:var(--navy);
-  }
-  .rede-list span{margin:0 28px 10px 0;}
-  .rede-list span.dim{color:var(--slate); font-family:"Work Sans",sans-serif; font-size:0.85rem;}
+/* VIDA ESCOLAR — gallery */
+.gal{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:230px;gap:14px}
+.g{position:relative;border-radius:16px;overflow:hidden;background:var(--navy);cursor:default}
+.g img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease),filter .6s}
+.g:hover img{transform:scale(1.09)}
+.g::after{content:'';position:absolute;inset:0;background:linear-gradient(transparent 38%,rgba(4,18,61,.88));transition:opacity .4s}
+.g .cap{position:absolute;left:18px;right:18px;bottom:16px;z-index:2;transform:translateY(8px);opacity:.95;transition:transform .45s var(--ease)}
+.g:hover .cap{transform:translateY(0)}
+.g .cap b{display:block;color:#fff;font-size:1.02rem;font-weight:600}
+.g .cap i{display:block;font-style:normal;color:var(--gold);font-size:.74rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+.g.wide{grid-column:span 2}
+.g.tall{grid-row:span 2}
 
-  /* ---------- fachada ---------- */
-  .fachada{background:var(--paper);}
-  .fachada img{
-    width:100%; border-radius:6px; object-fit:cover; max-height:520px;
-    box-shadow:0 22px 44px -20px rgba(12,42,129,0.45);
-  }
+/* MOMENTOS — scroller */
+.moments{background:var(--paper);overflow:hidden}
+.mom-track{display:flex;gap:16px;overflow-x:auto;padding:4px 26px 24px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.mom-track::-webkit-scrollbar{height:5px}
+.mom-track::-webkit-scrollbar-thumb{background:var(--navy);border-radius:10px}
+.mom-track::-webkit-scrollbar-track{background:rgba(12,42,129,.08);border-radius:10px}
+.mom{
+  flex:0 0 268px;scroll-snap-align:start;background:#fff;border:1px solid var(--line);
+  border-radius:16px;padding:26px 22px;transition:transform .4s var(--ease),box-shadow .4s var(--ease);
+}
+.mom:hover{transform:translateY(-6px);box-shadow:0 24px 44px -24px rgba(12,42,129,.4)}
+.mom .when{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-deep)}
+.mom h4{margin:9px 0 8px;font-size:1.1rem;color:var(--navy)}
+.mom p{font-size:.9rem;color:var(--slate)}
 
-  /* ---------- cta band ---------- */
-  .cta-band{
-    background:var(--gold);
-    color:var(--navy-deep);
-  }
-  .cta-band .wrap{
-    display:grid;
-    grid-template-columns:1.3fr 0.7fr;
-    gap:30px;
-    align-items:center;
-  }
-  .cta-band h2{color:var(--navy-deep); font-size:clamp(1.6rem,3vw,2.2rem); max-width:16ch;}
-  .cta-band p{margin-top:12px; max-width:44ch; color:#5a4308;}
-  .cta-band .btn{background:var(--navy); border-color:var(--navy); color:var(--cream);}
-  .cta-band .btn:hover{background:var(--navy-deep);}
+/* VALORES */
+.val{background:var(--navy);color:#fff;position:relative;overflow:hidden}
+.val .sec-head h2{color:#fff}
+.val .sec-head p{color:#b3bcdb}
+.val-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.v{padding:28px 26px;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);transition:background .4s,transform .4s var(--ease)}
+.v:hover{background:rgba(255,217,0,.09);transform:translateY(-6px)}
+.v h3{color:var(--gold);font-size:1.1rem;margin-bottom:9px}
+.v p{color:#b8c1df;font-size:.93rem}
 
-  /* ---------- footer ---------- */
-  footer{background:var(--navy-deep); color:#c7cee3; padding:64px 0 32px;}
-  .foot-grid{
-    display:grid; grid-template-columns:1.3fr 1fr 1fr;
-    gap:40px; padding-bottom:40px; border-bottom:1px solid rgba(255,255,255,0.12);
-  }
-  .foot-grid h4{color:var(--cream); font-family:"Poppins",sans-serif; font-weight:500; font-size:1rem; margin-bottom:16px;}
-  .foot-grid p, .foot-grid a{font-size:0.92rem; color:#c7cee3; text-decoration:none; line-height:1.8;}
-  .foot-grid a:hover{color:var(--gold);}
-  .foot-brand{display:flex; align-items:center; gap:12px; margin-bottom:16px;}
-  .foot-brand .brand-mark{width:36px;height:36px;}
-  .foot-brand span{font-family:"Poppins",sans-serif; color:var(--cream); font-size:1.05rem;}
-  .foot-bottom{
-    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
-    padding-top:26px; font-size:0.8rem; color:#8590ac;
-  }
+/* REDE */
+.rede-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:14px}
+.u{
+  border:1px solid var(--line);border-radius:14px;padding:22px 20px;background:#fff;
+  transition:border-color .4s,transform .4s var(--ease),box-shadow .4s var(--ease);
+}
+.u:hover{border-color:var(--navy);transform:translateY(-5px);box-shadow:0 20px 36px -22px rgba(12,42,129,.4)}
+.u b{display:block;color:var(--navy);font-size:1.04rem}
+.u span{font-size:.8rem;color:var(--slate)}
+.u.here{background:linear-gradient(135deg,var(--navy),var(--navy-deep));border-color:transparent}
+.u.here b{color:#fff}
+.u.here span{color:var(--gold)}
 
-  /* ---------- responsive ---------- */
-  @media (max-width: 880px){
-    nav.links{display:none;}
-    .menu-toggle{display:block;}
-    .hero-photo{min-height:100vw;}
-    .hero-band-yellow .stat-row{gap:0 20px;}
-    .historia-grid{grid-template-columns:1fr;}
-    .historia-photo{max-width:340px; margin:0 auto 8px;}
-    .pillars{grid-template-columns:1fr 1fr;}
-    .pillar{border-right:1px solid var(--line); border-bottom:1px solid var(--line); padding:26px 20px;}
-    .section-head{grid-template-columns:1fr;}
-    .seg-row{grid-template-columns:50px 1fr; }
-    .seg-row p{grid-column:2/3;}
-    .life-grid{grid-template-columns:1fr 1fr;}
-    .value-grid{grid-template-columns:1fr;}
-    .cta-band .wrap{grid-template-columns:1fr;}
-    .foot-grid{grid-template-columns:1fr; gap:28px;}
+/* FACHADA */
+.fach{padding:0;position:relative;height:clamp(340px,52vw,560px);overflow:hidden;background:var(--navy)}
+.fach img{width:100%;height:100%;object-fit:cover;transition:transform 8s linear}
+.fach:hover img{transform:scale(1.06)}
+.fach .lay{
+  position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,18,61,.86),rgba(4,18,61,.15));
+  display:flex;align-items:center;
+}
+.fach .lay .wrap{color:#fff}
+.fach h2{font-size:clamp(1.7rem,3.8vw,2.7rem);max-width:15ch}
+.fach p{margin-top:14px;color:#dbe1f3;max-width:40ch}
+.fach .addr{margin-top:20px;font-weight:600;color:var(--gold)}
+
+/* CTA */
+.cta{background:var(--gold);text-align:center}
+.cta h2{font-size:clamp(1.9rem,4.4vw,3rem);color:var(--navy-deep);max-width:19ch;margin:0 auto}
+.cta p{margin:16px auto 30px;color:#64510a;max-width:48ch;font-weight:500}
+
+/* FOOTER */
+footer{background:var(--navy-ink);color:#a8b2d4;padding:72px 0 30px}
+.f-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:46px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.1)}
+.f-brand{display:flex;align-items:center;gap:13px;margin-bottom:16px}
+.f-brand img{width:46px}
+.f-brand b{color:#fff;font-size:1.1rem;line-height:1.2}
+.f-grid h4{color:#fff;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:16px}
+.f-grid p{font-size:.93rem;line-height:1.9}
+.f-grid a{transition:color .3s}
+.f-grid a:hover{color:var(--gold)}
+.f-bot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding-top:26px;font-size:.8rem;color:#6e7aa3}
+
+/* WHATSAPP FLOAT */
+.zap{
+  position:fixed;right:20px;bottom:20px;z-index:300;width:58px;height:58px;border-radius:50%;
+  background:#25d366;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 12px 30px -8px rgba(37,211,102,.75);transition:transform .35s var(--ease);
+}
+.zap:hover{transform:scale(1.1)}
+.zap svg{width:30px;height:30px;fill:#fff}
+.zap::after{content:'';position:absolute;inset:0;border-radius:50%;border:2px solid #25d366;animation:ring 2.4s var(--ease) infinite}
+@keyframes ring{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.65);opacity:0}}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width:980px){
+  .pil-grid{grid-template-columns:1fr 1fr}
+  .gal{grid-template-columns:1fr 1fr;grid-auto-rows:200px}
+  .val-grid{grid-template-columns:1fr}
+  .hist-grid{grid-template-columns:1fr;gap:34px}
+  .hist-ph{max-width:420px}
+  .f-grid{grid-template-columns:1fr;gap:30px}
+  .stat-grid{grid-template-columns:1fr 1fr;gap:34px}
+}
+@media (max-width:760px){
+  section{padding:74px 0}
+  .links{
+    position:fixed;inset:0 0 auto;top:0;padding:96px 26px 34px;
+    background:var(--navy-deep);flex-direction:column;gap:4px;
+    transform:translateY(-100%);transition:transform .5s var(--ease);
   }
+  .links.open{transform:translateY(0)}
+  .links a{color:#fff!important;font-size:1.3rem;font-weight:600;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.1)}
+  .burger{display:block;z-index:210}
+  .burger.x i{background:#fff!important}
+  .cta-top{display:none}
+  .pil-grid{grid-template-columns:1fr}
+  .gal{grid-template-columns:1fr;grid-auto-rows:220px}
+  .g.wide,.g.tall{grid-column:auto;grid-row:auto}
+  .hero-in{padding:120px 26px 80px}
+  .fach .lay{background:linear-gradient(rgba(4,18,61,.55),rgba(4,18,61,.92))}
+}
 </style>
 </head>
 <body>
 
-<header>
+<div id="boot"><img src="img/logo.png" alt=""></div>
+
+<header id="hd">
   <div class="nav">
     <a href="#top" class="brand">
-      <img class="brand-mark" src="img/logo.png" alt="Selo do Colégio Cristão">
-      <div class="brand-text">Colégio Cristão<span>Ponta Grossa</span></div>
+      <img src="img/logo.png" alt="Selo do Colégio Cristão">
+      <span class="brand-txt">Colégio Cristão<small>Ponta Grossa</small></span>
     </a>
-    <nav class="links">
-      <a href="#historia">Nossa história</a>
+    <nav class="links" id="menu">
+      <a href="#historia">História</a>
       <a href="#pilares">Pilares</a>
       <a href="#ensino">Ensino</a>
-      <a href="#vida-escolar">Vida escolar</a>
+      <a href="#vida">Vida escolar</a>
+      <a href="#rede">A rede</a>
       <a href="#contato">Contato</a>
     </nav>
-    <a class="btn gold" href="https://wa.me/5542991624142?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20visita%20ao%20Col%C3%A9gio%20Crist%C3%A3o%20de%20Ponta%20Grossa" target="_blank" rel="noopener">Agendar visita</a>
-    <button class="menu-toggle" aria-label="Abrir menu" id="menuToggle"><span></span><span></span><span></span></button>
+    <a class="cta-top" href="https://wa.me/5542991624142?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20visita%20ao%20Col%C3%A9gio%20Crist%C3%A3o%20de%20Ponta%20Grossa" target="_blank" rel="noopener">Agendar visita</a>
+    <button class="burger" id="bg" aria-label="Menu"><i></i><i></i><i></i></button>
   </div>
 </header>
 
 <main id="top">
 
-  <!-- HERO -->
-  <section class="hero-photo" style="background-image:url('img/foto-hero.jpg')">
-    <div class="hero-text">
-      <p class="hero-eyebrow">Escola cristã bilíngue em Ponta Grossa</p>
-      <h1>Formação forte no <span class="accent">conhecimento</span>, firme nos valores</h1>
-      <p class="lead">O Colégio Cristão chegou a Ponta Grossa para unir ensino bilíngue de qualidade, segurança física e emocional e uma educação construída sobre princípios cristãos — desde a Educação Infantil.</p>
-    </div>
-  </section>
-
-  <div class="hero-band-yellow">
-    <div class="crest"><img src="img/logo.png" alt="Selo do Colégio Cristão"></div>
-    <h2>Colégio Cristão Mais Completo</h2>
-    <p>Segurança física e emocional, ensino bilíngue: matrículas abertas</p>
-    <div class="stat-row">
-      <div class="stat"><b>Bilíngue</b><span>todos os dias</span></div>
-      <div class="stat"><b>~16 alunos</b><span>por sala de aula</span></div>
-      <div class="stat"><b>6 unidades</b><span>Rede Colégio Cristão</span></div>
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-in">
+    <span class="kicker" data-rev><span class="dot"></span>Matrículas abertas 2027</span>
+    <h1 data-rev style="transition-delay:.1s">Forte no conhecimento,<br><span class="gold">firme</span> <span class="serif">nos valores</span></h1>
+    <p class="lead" data-rev style="transition-delay:.2s">Escola cristã bilíngue na Vila Estrela. Turmas de cerca de 16 alunos, inglês todos os dias e uma formação que cuida do caráter tanto quanto do boletim.</p>
+    <div class="hero-btns" data-rev style="transition-delay:.3s">
+      <a class="btn btn-gold" href="https://wa.me/5542991624142?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20visita%20ao%20Col%C3%A9gio%20Crist%C3%A3o%20de%20Ponta%20Grossa" target="_blank" rel="noopener">Agende uma visita</a>
+      <a class="btn btn-ghost" href="#ensino">Conhecer o ensino</a>
     </div>
   </div>
+  <div class="scrolly">Role<i></i></div>
+</section>
 
-  <div class="hero-cta-float">
-    <a class="btn gold" href="https://wa.me/5542991624142?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20visita%20ao%20Col%C3%A9gio%20Crist%C3%A3o%20de%20Ponta%20Grossa" target="_blank" rel="noopener">Agende uma visita</a>
-    <a class="text-link" href="#ensino">Conhecer o ensino</a>
+<!-- ============ MARQUEE ============ -->
+<div class="marq">
+  <div class="marq-t" id="mq">
+    <span>Educação Infantil</span><b>•</b><span>Ensino Fundamental</span><b>•</b><span>Bilíngue todo dia</span><b>•</b><span>Turmas de ~16 alunos</span><b>•</b><span>Princípios cristãos</span><b>•</b><span>Matrículas abertas</span><b>•</b>
   </div>
+</div>
 
-  <div class="strip">
-    <div class="track">
-      <span>MATRÍCULAS ABERTAS</span>
-      <span>EDUCAÇÃO INFANTIL</span>
-      <span>ENSINO FUNDAMENTAL I</span>
-      <span>ENSINO BILÍNGUE</span>
-      <span>VALORES CRISTÃOS</span>
-      <span>MATRÍCULAS ABERTAS</span>
-      <span>EDUCAÇÃO INFANTIL</span>
-      <span>ENSINO FUNDAMENTAL I</span>
-      <span>ENSINO BILÍNGUE</span>
-      <span>VALORES CRISTÃOS</span>
+<!-- ============ STATS ============ -->
+<div class="stats">
+  <div class="wrap">
+    <div class="stat-grid stagger" data-rev>
+      <div class="stat"><b data-count="16" data-pre="~">0</b><span>alunos por turma</span></div>
+      <div class="stat"><b data-count="100" data-suf="%">0</b><span>bilíngue, todos os dias</span></div>
+      <div class="stat"><b data-count="7" data-suf=" unidades">0</b><span>na Rede Colégio Cristão</span></div>
+      <div class="stat"><b data-count="2025" data-raw="1">0</b><span>ano de abertura em PG</span></div>
     </div>
   </div>
+</div>
 
-  <!-- HISTORIA -->
-  <section id="historia" class="tight">
-    <div class="wrap historia-grid">
-      <div class="historia-photo">
-        <img src="img/foto-historia.jpg" alt="Professoras e alunos em sala de aula do Colégio Cristão de Ponta Grossa">
+<!-- ============ HISTÓRIA ============ -->
+<section class="hist" id="historia">
+  <div class="wrap hist-grid">
+    <div class="hist-ph" data-rev data-dir="left">
+      <img src="img/foto-historia.jpg" alt="Professoras e alunos da Educação Infantil do Colégio Cristão Ponta Grossa">
+      <span class="tagline">Educação Infantil — aula de Formação Cristã</span>
+    </div>
+    <div class="hist-copy" data-rev data-dir="right">
+      <span class="sec-tag">Como tudo começou</span>
+      <h2>Uma escola que nasceu de uma oração</h2>
+      <p>O Colégio Cristão de Ponta Grossa é fruto da visão da pastora <strong>Tatiane Joslin</strong>, pós-graduada em Neurociência, Educação e Desenvolvimento Infantil e sócia-proprietária da rede. Foi ela quem trouxe para a cidade a proposta nascida em Porto Velho (RO): rigor acadêmico, ensino bilíngue e formação de caráter a partir de princípios bíblicos.</p>
+      <p>A unidade abriu as portas na Vila Estrela no primeiro semestre de 2025. Desde o primeiro dia, as turmas são enxutas de propósito — em média 16 alunos — para que cada criança seja conhecida pelo nome, acompanhada de perto e cuidada dentro e fora da sala de aula.</p>
+      <p>Dois anos depois, isso aparece no calendário: Feira do Empreendedorismo, Dad &amp; Me Camp, Festa da Colheita, Show de Talentos, desfile cívico, medalha de ouro no judô. Escola é conteúdo, mas também é memória.</p>
+      <blockquote class="quote serif">Educar não é apenas ensinar matérias. É desenvolver responsabilidade, fortalecer valores e formar cidadãos conscientes.</blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PILARES ============ -->
+<section id="pilares">
+  <div class="wrap">
+    <div class="sec-head center" data-rev>
+      <span class="sec-tag">Nossos pilares</span>
+      <h2>Quatro bases sustentam cada dia de aula</h2>
+      <p>Antes de qualquer conteúdo, garantimos o essencial: um ambiente onde a criança se sente segura para aprender, errar e crescer.</p>
+    </div>
+    <div class="pil-grid stagger" data-rev>
+      <div class="pil">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6l7-3z"/><path d="M9.5 12l1.8 1.8 3.5-3.6"/></svg></div>
+        <h3>Segurança física</h3>
+        <p>Ambiente monitorado, acesso controlado e equipe treinada para cuidar de cada detalhe da rotina escolar.</p>
       </div>
-      <div class="historia-copy">
-        <p class="eyebrow">Como tudo começou</p>
-        <h2>Uma escola que nasceu de uma oração</h2>
-        <p>O Colégio Cristão de Ponta Grossa é fruto da visão da pastora Tatiane Joslin, pós-graduada em Neurociência, Educação e Desenvolvimento Infantil e sócia-proprietária da rede. Foi ela quem trouxe para a cidade a proposta nascida em Porto Velho (RO): uma educação que une rigor acadêmico, ensino bilíngue e formação de caráter a partir de princípios bíblicos.</p>
-        <p>A unidade abriu as portas na Vila Estrela no primeiro semestre de 2025, com turmas enxutas — em média 16 alunos — pensadas para que cada criança seja conhecida, acompanhada e cuidada de perto, dentro e fora da sala de aula.</p>
-        <p>Hoje, a proposta segue viva no dia a dia da escola: no acolhimento das famílias, nas datas comemorativas e na forma como cada disciplina carrega, além do conteúdo, um pouco de caráter.</p>
+      <div class="pil">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M20.8 6.6a5 5 0 00-7.1 0L12 8.3l-1.7-1.7a5 5 0 10-7.1 7.1l8.8 8.8 8.8-8.8a5 5 0 000-7.1z"/></svg></div>
+        <h3>Segurança emocional</h3>
+        <p>Competências socioemocionais trabalhadas o ano todo: resiliência, empatia e capacidade de resolver problemas.</p>
+      </div>
+      <div class="pil">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 5.5A2.5 2.5 0 015.5 3H11v18H5.5A2.5 2.5 0 013 18.5z"/><path d="M21 5.5A2.5 2.5 0 0018.5 3H13v18h5.5a2.5 2.5 0 002.5-2.5z"/></svg></div>
+        <h3>Qualidade de ensino</h3>
+        <p>Metodologia atual, material didático rico e inglês incorporado à rotina — não como matéria isolada, mas como prática diária.</p>
+      </div>
+      <div class="pil">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2v20"/><path d="M5 8h14"/><path d="M8.5 15.5a3.5 3.5 0 007 0"/></svg></div>
+        <h3>Princípios cristãos</h3>
+        <p>Ética, honestidade, justiça e amor discutidos em sala, como parte da formação de caráter de cada aluno.</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- PILARES -->
-  <section id="pilares">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>Quatro pilares sustentam cada dia de aula</h2>
-        <p>Antes de qualquer conteúdo, garantimos a base: um ambiente onde a criança se sente segura para aprender, crescer e ser quem é.</p>
+<!-- ============ ENSINO ============ -->
+<section class="seg" id="ensino">
+  <div class="wrap">
+    <div class="sec-head" data-rev>
+      <span class="sec-tag">Segmentos</span>
+      <h2>Uma jornada, uma etapa de cada vez</h2>
+      <p>A unidade de Ponta Grossa nasceu para crescer junto com as famílias — e cresce a cada ano com os alunos que já estão aqui.</p>
+    </div>
+    <div class="tl" data-rev id="tl">
+      <div class="tl-line"></div>
+      <div class="tl-row">
+        <span class="node"></span>
+        <span class="yrs">Infantil 2 ao Infantil 5</span>
+        <h3>Educação Infantil</h3>
+        <p>Espaço planejado para o brincar, o movimento e as descobertas sensoriais. É onde começa o inglês, a rotina de leitura e os primeiros projetos — do Dia da Tinta ao Museu da Bíblia.</p>
       </div>
-      <div class="pillars">
-        <div class="pillar">
-          <span class="num">01</span>
-          <h3>Segurança física</h3>
-          <p>Ambiente monitorado, estacionamento amplo e equipe treinada para cuidar de cada detalhe da rotina escolar.</p>
-        </div>
-        <div class="pillar">
-          <span class="num">02</span>
-          <h3>Segurança emocional</h3>
-          <p>Trabalho constante com competências socioemocionais, para formar crianças resilientes, empáticas e prontas para resolver problemas.</p>
-        </div>
-        <div class="pillar">
-          <span class="num">03</span>
-          <h3>Qualidade de ensino</h3>
-          <p>Metodologia atual, material didático rico e ensino bilíngue incorporado à rotina — não como disciplina isolada, mas como prática diária.</p>
-        </div>
-        <div class="pillar">
-          <span class="num">04</span>
-          <h3>Princípios cristãos</h3>
-          <p>Ética, honestidade, justiça e amor discutidos dentro da sala de aula, como parte da formação do caráter de cada aluno.</p>
-        </div>
+      <div class="tl-row">
+        <span class="node"></span>
+        <span class="yrs">1º ao 4º ano</span>
+        <h3>Ensino Fundamental I</h3>
+        <p>Alfabetização sólida, hábitos de estudo e autonomia. Turmas em torno de 16 alunos permitem acompanhar de perto o desenvolvimento acadêmico e socioemocional de cada criança.</p>
+      </div>
+      <div class="tl-row">
+        <span class="node"></span>
+        <span class="yrs">A partir de 2027 — período matutino</span>
+        <h3>5º e 6º ano</h3>
+        <p>Seu filho cresceu, e o Colégio Cristão cresceu com ele. A escola amplia os anos finais acompanhando a própria turma, sem que a família precise recomeçar em outro lugar.</p>
+        <span class="pill">Novo</span>
+      </div>
+      <div class="tl-row">
+        <span class="node"></span>
+        <span class="yrs">Próximas etapas</span>
+        <h3>Fundamental II e Ensino Médio</h3>
+        <p>Seguem o ritmo de crescimento da Rede Colégio Cristão, já em operação em outras unidades do país.</p>
+        <span class="pill">Em expansão</span>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ENSINO / SEGMENTS -->
-  <section id="ensino" class="segments">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>Uma jornada, uma etapa de cada vez</h2>
-        <p>A unidade de Ponta Grossa nasceu para crescer junto com as famílias — começando pelos primeiros anos escolares.</p>
+<!-- ============ VIDA ESCOLAR ============ -->
+<section id="vida">
+  <div class="wrap">
+    <div class="sec-head" data-rev>
+      <span class="sec-tag">Vida escolar</span>
+      <h2>O que acontece entre uma aula e outra</h2>
+      <p>Projetos, festas e saídas pedagógicas que a família acompanha de perto — e que as crianças lembram muito tempo depois.</p>
+    </div>
+    <div class="gal stagger" data-rev>
+      <div class="g wide tall">
+        <img src="img/foto-vida-1.jpg" alt="Alunos na Festa da Colheita do Colégio Cristão Ponta Grossa">
+        <div class="cap"><i>Julho</i><b>Festa da Colheita</b></div>
       </div>
-      <div class="seg-list">
-        <div class="seg-row">
-          <div class="idx">01</div>
-          <h3>Educação Infantil</h3>
-          <p>Turmas do Infantil 2 ao Infantil 5, com espaço planejado para o brincar, o contato com a natureza e os primeiros passos do ensino bilíngue.</p>
-        </div>
-        <div class="seg-row">
-          <div class="idx">02</div>
-          <h3>Ensino Fundamental I</h3>
-          <p>Do 1º ao 5º ano, com turmas enxutas — em torno de 16 alunos — para acompanhar de perto o desenvolvimento acadêmico e socioemocional de cada criança.</p>
-        </div>
-        <div class="seg-row future">
-          <div class="idx">03</div>
-          <h3>Próximas etapas</h3>
-          <p>Fundamental II e Ensino Médio seguem o ritmo de crescimento da Rede Colégio Cristão, já presentes em outras unidades do país.
-            <span class="badge">Em expansão</span>
-          </p>
-        </div>
+      <div class="g tall">
+        <img src="img/foto-vida-3.jpg" alt="Aluna brincando com bolhas de sabão na quadra do colégio">
+        <div class="cap"><i>Recreio</i><b>Brincar faz parte de aprender</b></div>
+      </div>
+      <div class="g">
+        <img src="img/foto-vida-2.jpg" alt="Projeto de reciclagem e separação de resíduos na escola">
+        <div class="cap"><i>O ano todo</i><b>Consciência e reciclagem</b></div>
+      </div>
+      <div class="g">
+        <img src="img/foto-historia.jpg" alt="Aula de Formação Cristã na Educação Infantil">
+        <div class="cap"><i>Toda semana</i><b>Formação Cristã</b></div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- VIDA ESCOLAR -->
-  <section id="vida-escolar" class="tight">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>A vida escolar em Ponta Grossa</h2>
-        <p>Além da sala de aula: datas comemorativas, oficinas e encontros que aproximam família e escola ao longo do ano.</p>
-      </div>
-      <div class="life-grid">
-        <div class="life-card" style="background-image:linear-gradient(180deg, rgba(12,42,129,0) 45%, rgba(8,29,92,.90) 100%), url('img/foto-vida-1.jpg');">
-          <p class="tag">Julho</p>
-          <h4>Festa da Colheita</h4>
-        </div>
-        <div class="life-card" style="background-image:linear-gradient(180deg, rgba(12,42,129,0) 45%, rgba(8,29,92,.90) 100%), url('img/foto-vida-2.jpg');">
-          <p class="tag">O ano todo</p>
-          <h4>Consciência e reciclagem</h4>
-        </div>
-        <div class="life-card" style="background-image:linear-gradient(180deg, rgba(12,42,129,0) 45%, rgba(8,29,92,.90) 100%), url('img/foto-vida-3.jpg');">
-          <p class="tag">Recreio</p>
-          <h4>Brincar faz parte de aprender</h4>
-        </div>
-        <div class="life-card" style="background-image:linear-gradient(180deg, rgba(12,42,129,0) 45%, rgba(8,29,92,.90) 100%), url('img/foto-historia.jpg');">
-          <p class="tag">O ano todo</p>
-          <h4>Datas em família</h4>
-        </div>
-      </div>
+<!-- ============ MOMENTOS ============ -->
+<section class="moments">
+  <div class="wrap">
+    <div class="sec-head" data-rev>
+      <span class="sec-tag">Dois anos em Ponta Grossa</span>
+      <h2>Momentos que já viraram tradição</h2>
+      <p>Arraste para o lado e veja o que marcou o calendário da escola desde a abertura.</p>
     </div>
-  </section>
+  </div>
+  <div class="mom-track" data-rev>
+    <div class="mom"><span class="when">Ensino Fundamental</span><h4>Feira do Empreendedorismo</h4><p>A primeira edição foi um sucesso: criatividade, iniciativa e produtos criados pelos próprios alunos.</p></div>
+    <div class="mom"><span class="when">Agosto</span><h4>Dad &amp; Me Camp</h4><p>Acampamento de pais e filhos em comemoração ao Dia dos Pais, com atividades ao ar livre.</p></div>
+    <div class="mom"><span class="when">Maio</span><h4>MOMents to Cherish</h4><p>Homenagem às mães preparada com carinho pela escola, do convite à decoração.</p></div>
+    <div class="mom"><span class="when">Outubro</span><h4>Semana das Crianças</h4><p>Show de Talentos, Dia da Fantasia, Dia do Cabelo Criativo e Dia da Tinta — uma semana inteira de memórias.</p></div>
+    <div class="mom"><span class="when">Esporte</span><h4>Judô — ouro</h4><p>Alunos representando o Colégio Cristão no pódio dos campeonatos da cidade.</p></div>
+    <div class="mom"><span class="when">Setembro</span><h4>Desfile Cívico</h4><p>A escola nas ruas de Ponta Grossa, com as famílias acompanhando das calçadas.</p></div>
+    <div class="mom"><span class="when">Infantil V</span><h4>Visita ao MUBI</h4><p>Saída pedagógica ao Museu da Bíblia, aprendendo história e curiosidades fora da sala.</p></div>
+    <div class="mom"><span class="when">Férias</span><h4>Colônia de Férias</h4><p>Programação especial para que as crianças aproveitem o recesso com segurança e diversão.</p></div>
+    <div class="mom"><span class="when">Bilíngue</span><h4>Projeto Minha Família</h4><p>Famílias convidadas para a sala de aula em um projeto conduzido em inglês pelos alunos.</p></div>
+  </div>
+</section>
 
-  <!-- VALORES BAND -->
-  <section class="values">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>Educando com princípios e valores</h2>
-        <p>Cada disciplina é uma oportunidade de formar caráter, não só transmitir conteúdo.</p>
-      </div>
-      <div class="value-grid">
-        <div><h3>Empreendedorismo</h3><p>Desde cedo, os alunos exploram ideias e resolução de problemas com autonomia.</p></div>
-        <div><h3>Pensamento computacional</h3><p>Lógica e raciocínio estruturado, aplicados de forma prática ao longo do currículo.</p></div>
-        <div><h3>Educação financeira</h3><p>Noções de valor, planejamento e responsabilidade trabalhadas desde a infância.</p></div>
-      </div>
+<!-- ============ VALORES ============ -->
+<section class="val">
+  <div class="wrap">
+    <div class="sec-head center" data-rev>
+      <span class="sec-tag">Além do currículo</span>
+      <h2>Educando com princípios e valores</h2>
+      <p>Cada disciplina é uma oportunidade de formar caráter, não só de transmitir conteúdo.</p>
     </div>
-  </section>
+    <div class="val-grid stagger" data-rev>
+      <div class="v"><h3>Empreendedorismo</h3><p>Desde cedo os alunos exploram ideias, calculam, apresentam e vendem o que criaram. A Feira do Empreendedorismo é o ponto alto do ano.</p></div>
+      <div class="v"><h3>Educação financeira</h3><p>Noções de valor, planejamento e responsabilidade trabalhadas de forma concreta, na idade em que os hábitos se formam.</p></div>
+      <div class="v"><h3>Pensamento computacional</h3><p>Lógica e raciocínio estruturado aplicados de forma prática ao longo do currículo, preparando para um mundo digital.</p></div>
+    </div>
+  </div>
+</section>
 
-  <!-- REDE -->
-  <section id="rede" class="tight">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>Parte da Rede Colégio Cristão</h2>
-        <p>Ponta Grossa é uma das unidades da rede, com a mesma proposta pedagógica nascida em Porto Velho (RO).</p>
-      </div>
-      <div class="rede-list">
-        <span>Porto Velho <span class="dim">— matriz</span></span>
-        <span>Ariquemes</span>
-        <span>Petrolina</span>
-        <span>Itabira</span>
-        <span>Manaus</span>
-        <span>Ponta Grossa</span>
-      </div>
+<!-- ============ REDE ============ -->
+<section id="rede">
+  <div class="wrap">
+    <div class="sec-head" data-rev>
+      <span class="sec-tag">Rede Colégio Cristão</span>
+      <h2>Uma proposta nacional, uma escola de bairro</h2>
+      <p>Ponta Grossa é uma das unidades da rede nascida em Porto Velho (RO). Mesma proposta pedagógica, mesmo material, mesmos pilares — com a cara e o cuidado de uma escola que conhece cada família pelo nome.</p>
     </div>
-  </section>
+    <div class="rede-grid stagger" data-rev>
+      <div class="u here"><b>Ponta Grossa</b><span>Paraná — você está aqui</span></div>
+      <div class="u"><b>Porto Velho</b><span>Rondônia — matriz</span></div>
+      <div class="u"><b>Ariquemes</b><span>Rondônia</span></div>
+      <div class="u"><b>Manaus</b><span>Amazonas</span></div>
+      <div class="u"><b>Petrolina</b><span>Pernambuco</span></div>
+      <div class="u"><b>Itabira</b><span>Minas Gerais</span></div>
+      <div class="u"><b>Irecê</b><span>Bahia — em breve</span></div>
+    </div>
+  </div>
+</section>
 
-  <!-- FACHADA -->
-  <section class="fachada tight">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>Nossa unidade na Vila Estrela</h2>
-        <p>Rua Prudente de Morais, 42 — um espaço pensado para acolher, com acesso seguro e estrutura completa.</p>
-      </div>
-      <img src="img/foto-fachada.jpg" alt="Fachada do Colégio Cristão de Ponta Grossa na Vila Estrela" loading="lazy">
+<!-- ============ FACHADA ============ -->
+<div class="fach">
+  <img src="img/foto-fachada.jpg" alt="Fachada do Colégio Cristão de Ponta Grossa, na Vila Estrela">
+  <div class="lay">
+    <div class="wrap" data-rev data-dir="left">
+      <span class="sec-tag" style="color:var(--gold)">Nossa unidade</span>
+      <h2>Na Vila Estrela, a poucos minutos do centro</h2>
+      <p>Um prédio pensado para acolher: acesso seguro, pátio coberto, quadra e salas planejadas para turmas pequenas.</p>
+      <p class="addr">Rua Prudente de Morais, 42 — Vila Estrela, Ponta Grossa/PR</p>
     </div>
-  </section>
+  </div>
+</div>
 
-  <!-- CTA BAND -->
-  <section class="cta-band">
-    <div class="wrap">
-      <div>
-        <h2>Conheça a escola de perto — agende sua visita.</h2>
-        <p>Nossa equipe apresenta o espaço, a proposta pedagógica e tira todas as suas dúvidas sobre matrícula.</p>
-      </div>
-      <a class="btn" href="https://wa.me/5542991624142?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20visita%20ao%20Col%C3%A9gio%20Crist%C3%A3o%20de%20Ponta%20Grossa" target="_blank" rel="noopener">Agendar visita no WhatsApp</a>
-    </div>
-  </section>
+<!-- ============ CTA ============ -->
+<section class="cta">
+  <div class="wrap" data-rev>
+    <h2>Conheça a escola de perto</h2>
+    <p>Nossa equipe apresenta o espaço, a proposta pedagógica e tira todas as suas dúvidas sobre matrícula. Sem compromisso.</p>
+    <a class="btn btn-navy" href="https://wa.me/5542991624142?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20visita%20ao%20Col%C3%A9gio%20Crist%C3%A3o%20de%20Ponta%20Grossa" target="_blank" rel="noopener">Agendar visita no WhatsApp</a>
+  </div>
+</section>
 
 </main>
 
+<!-- ============ FOOTER ============ -->
 <footer id="contato">
   <div class="wrap">
-    <div class="foot-grid">
-      <div>
-        <div class="foot-brand">
-          <img class="brand-mark" src="img/logo.png" alt="Selo do Colégio Cristão">
-          <span>Colégio Cristão<br>Ponta Grossa</span>
+    <div class="f-grid">
+      <div data-rev>
+        <div class="f-brand">
+          <img src="img/logo.png" alt="">
+          <b>Colégio Cristão<br>Ponta Grossa</b>
         </div>
-        <p>Ensino de excelência, educação por princípios cristãos e fortalecimento de virtudes — bilíngue para todos os alunos.</p>
+        <p>Ensino de excelência, educação por princípios cristãos e fortalecimento de virtudes — bilíngue para todos os alunos, todos os dias.</p>
       </div>
-      <div>
+      <div data-rev style="transition-delay:.1s">
         <h4>Contato</h4>
-        <p>Rua Prudente de Morais, 42<br>Vila Estrela — Ponta Grossa, PR<br>CEP 84040-150</p>
-        <p><a href="https://wa.me/5542991624142" target="_blank" rel="noopener">(42) 99162-4142</a></p>
+        <p>
+          Rua Prudente de Morais, 42<br>
+          Vila Estrela — Ponta Grossa, PR<br>
+          CEP 84040-150<br><br>
+          <a href="https://wa.me/5542991624142" target="_blank" rel="noopener">(42) 99162-4142</a>
+        </p>
       </div>
-      <div>
+      <div data-rev style="transition-delay:.2s">
         <h4>Acompanhe</h4>
-        <p><a href="https://www.instagram.com/colegiocristaopontagrossa" target="_blank" rel="noopener">Instagram @colegiocristaopontagrossa</a></p>
-        <p><a href="https://colegiocristaoportovelho.com.br/" target="_blank" rel="noopener">Rede Colégio Cristão</a></p>
+        <p>
+          <a href="https://www.instagram.com/colegiocristaopontagrossa" target="_blank" rel="noopener">@colegiocristaopontagrossa</a><br>
+          <a href="https://colegiocristaoportovelho.com.br/" target="_blank" rel="noopener">Rede Colégio Cristão</a>
+        </p>
       </div>
     </div>
-    <div class="foot-bottom">
-      <span>© 2026 Colégio Cristão Ponta Grossa. Unidade da Rede Colégio Cristão.</span>
+    <div class="f-bot">
+      <span>© 2026 Colégio Cristão Ponta Grossa — unidade da Rede Colégio Cristão.</span>
       <span>Feito com propósito, para famílias de Ponta Grossa.</span>
     </div>
   </div>
 </footer>
 
-<script>
-  const toggle = document.getElementById('menuToggle');
-  const links = document.querySelector('nav.links');
-  toggle.addEventListener('click', () => {
-    const open = links.style.display === 'flex';
-    links.style.display = open ? 'none' : 'flex';
-    links.style.cssText += open ? '' : 'position:absolute; top:100%; left:0; right:0; background:#ffffff; flex-direction:column; padding:20px 28px; gap:18px; border-bottom:1px solid rgba(20,36,73,0.14);';
-  });
-</script>
+<a class="zap" href="https://wa.me/5542991624142?text=Ol%C3%A1%2C%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20Col%C3%A9gio%20Crist%C3%A3o%20de%20Ponta%20Grossa" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M.06 24l1.69-6.16A11.87 11.87 0 01.16 11.9C.16 5.34 5.5 0 12.06 0a11.8 11.8 0 018.4 3.49 11.8 11.8 0 013.48 8.41c0 6.56-5.34 11.9-11.9 11.9a11.9 11.9 0 01-5.69-1.45L.06 24zm6.6-3.8c1.68 1 3.28 1.59 5.4 1.59 5.45 0 9.9-4.43 9.9-9.89A9.88 9.88 0 0012.07 2c-5.46 0-9.9 4.44-9.9 9.9 0 2.22.65 3.88 1.74 5.62l-1 3.65 3.75-.98zm11.38-5.56c-.07-.12-.27-.2-.57-.35-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.14-.13.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.68-1.62-.93-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.8.37s-1.04 1.02-1.04 2.49 1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.42.25-.69.25-1.29.18-1.41z"/></svg>
+</a>
 
+<script>
+(function(){
+  var RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- preloader ---- */
+  window.addEventListener('load', function(){
+    setTimeout(function(){ document.getElementById('boot').classList.add('done'); }, 380);
+  });
+
+  /* ---- header shrink ---- */
+  var hd = document.getElementById('hd');
+  function onScroll(){
+    if(window.scrollY > 60) hd.classList.add('solid'); else hd.classList.remove('solid');
+  }
+  onScroll();
+
+  /* ---- hero parallax ---- */
+  var heroBg = document.getElementById('heroBg'), ticking = false;
+  function parallax(){
+    if(RM) return;
+    var y = window.scrollY;
+    if(y < window.innerHeight * 1.2){
+      heroBg.style.transform = 'translate3d(0,' + (y * 0.32) + 'px,0) scale(1.04)';
+    }
+  }
+  window.addEventListener('scroll', function(){
+    onScroll();
+    if(!ticking){ window.requestAnimationFrame(function(){ parallax(); ticking = false; }); ticking = true; }
+  }, {passive:true});
+
+  /* ---- scroll reveal ---- */
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.14, rootMargin:'0px 0px -60px 0px'});
+  document.querySelectorAll('[data-rev],.stagger').forEach(function(el){ io.observe(el); });
+
+  /* ---- count up ---- */
+  var cio = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) return;
+      var el = e.target, end = parseFloat(el.dataset.count),
+          pre = el.dataset.pre || '', suf = el.dataset.suf || '', raw = el.dataset.raw;
+      if(RM){ el.textContent = pre + end + suf; cio.unobserve(el); return; }
+      var t0 = null, dur = 1500;
+      function step(ts){
+        if(!t0) t0 = ts;
+        var p = Math.min((ts - t0) / dur, 1);
+        var v = Math.round(end * (1 - Math.pow(1 - p, 3)));
+        el.textContent = pre + (raw ? v : v.toLocaleString('pt-BR')) + suf;
+        if(p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+      cio.unobserve(el);
+    });
+  }, {threshold:0.5});
+  document.querySelectorAll('[data-count]').forEach(function(el){ cio.observe(el); });
+
+  /* ---- marquee seamless ---- */
+  var mq = document.getElementById('mq');
+  mq.innerHTML = mq.innerHTML + mq.innerHTML;
+
+  /* ---- mobile menu ---- */
+  var bg = document.getElementById('bg'), menu = document.getElementById('menu');
+  bg.addEventListener('click', function(){
+    menu.classList.toggle('open');
+    bg.classList.toggle('x');
+  });
+  menu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ menu.classList.remove('open'); bg.classList.remove('x'); });
+  });
+})();
+</script>
 </body>
 </html>
