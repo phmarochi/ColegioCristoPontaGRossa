@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Tour virtual (teste) — Colégio Cristão Ponta Grossa</title>
+<link rel="icon" href="img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0c2a81;
+  --navy-ink:#04123d;
+  --gold:#ffd900;
+  --white:#fff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--navy-ink)}
+body{
+  font-family:'Outfit',system-ui,sans-serif;
+  color:var(--white);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+
+/* ---------- Intro ---------- */
+.intro{
+  height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:0 24px;
+  background:radial-gradient(120% 90% at 50% 0%, var(--navy) 0%, var(--navy-ink) 70%);
+}
+.intro .tag{
+  font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:600;
+}
+.intro h1{font-size:clamp(34px,6vw,68px);font-weight:800;letter-spacing:-.02em;line-height:1.05;margin:18px 0 14px}
+.intro p{max-width:520px;color:#c9d2ec;font-size:17px;line-height:1.6}
+.intro .down{
+  margin-top:36px;font-size:13px;color:#c9d2ec;letter-spacing:.08em;
+  animation:bob 2s ease-in-out infinite;
+}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+
+/* ---------- Progress & HUD ---------- */
+.progress{
+  position:fixed;top:0;left:0;height:3px;width:100%;background:rgba(255,255,255,.12);z-index:20;
+}
+.progress span{display:block;height:100%;width:0;background:var(--gold)}
+.hud{
+  position:fixed;top:16px;left:20px;right:20px;z-index:20;
+  display:flex;justify-content:space-between;align-items:center;pointer-events:none;
+}
+.hud a{pointer-events:auto;font-size:13px;font-weight:600;background:rgba(4,18,61,.6);
+  padding:8px 14px;border-radius:999px;backdrop-filter:blur(6px)}
+.hud .counter{font-size:13px;background:rgba(4,18,61,.6);padding:8px 14px;border-radius:999px;backdrop-filter:blur(6px)}
+.dots{
+  position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:20;
+  display:flex;flex-direction:column;gap:10px;
+}
+.dots i{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.35);transition:background .3s,transform .3s}
+.dots i.on{background:var(--gold);transform:scale(1.35)}
+
+/* ---------- Scenes ---------- */
+.scene{position:relative;height:260vh}
+.stage{
+  position:sticky;top:0;height:100vh;overflow:hidden;background:var(--navy-ink);
+}
+.stage img{
+  position:absolute;inset:-4% -4%;width:108%;height:108%;
+  object-fit:cover;will-change:transform;transform:scale(1.12);
+}
+.stage::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(to top, rgba(4,18,61,.85) 0%, rgba(4,18,61,0) 45%),
+             linear-gradient(to bottom, rgba(4,18,61,.45) 0%, rgba(4,18,61,0) 22%);
+}
+.caption{
+  position:absolute;left:0;right:0;bottom:12vh;z-index:2;padding:0 28px;max-width:760px;margin:0 auto;
+  will-change:opacity,transform;
+}
+.caption .room{
+  font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:700;
+}
+.caption h2{font-size:clamp(30px,4.6vw,54px);font-weight:800;letter-spacing:-.02em;line-height:1.05;margin:10px 0 12px}
+.caption p{font-size:clamp(15px,1.6vw,18px);color:#dfe6f7;line-height:1.6;max-width:560px}
+
+/* ---------- Outro ---------- */
+.outro{
+  height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  padding:0 24px;background:radial-gradient(120% 90% at 50% 100%, var(--navy) 0%, var(--navy-ink) 70%);
+}
+.outro h2{font-size:clamp(30px,5vw,52px);font-weight:800;letter-spacing:-.02em;margin-bottom:14px}
+.outro p{color:#c9d2ec;max-width:460px;line-height:1.6;margin-bottom:28px}
+.btn{
+  display:inline-block;background:var(--gold);color:var(--navy-ink);font-weight:700;
+  padding:14px 26px;border-radius:999px;font-size:15px;
+}
+
+/* Scene entrance on first reveal */
+.caption{transition:none}
+
+@media (prefers-reduced-motion:reduce){
+  .intro .down{animation:none}
+  .stage img{transform:none!important}
+  .caption{opacity:1!important;transform:none!important}
+}
+</style>
+</head>
+<body>
+
+<div class="progress"><span id="bar"></span></div>
+
+<div class="hud">
+  <a href="/">← Voltar ao site</a>
+  <div class="counter" id="counter">Tour virtual</div>
+</div>
+
+<nav class="dots" id="dots" aria-hidden="true"></nav>
+
+<header class="intro">
+  <span class="tag">Tour virtual · teste</span>
+  <h1>Conheça o nosso colégio</h1>
+  <p>Role a página para caminhar pelo hall de entrada e pela biblioteca.</p>
+  <span class="down">Role para começar ↓</span>
+</header>
+
+<!-- Hall de entrada -->
+<section class="scene" data-room="Hall de entrada">
+  <div class="stage">
+    <img src="img/tour/hall-1.jpg" alt="Hall de entrada com bancos de apoio, o mural da escola e uniformes em exposição" loading="eager">
+    <div class="caption" data-caption>
+      <span class="room">01 · Hall de entrada</span>
+      <h2>Bem-vindo</h2>
+      <p>Bancos de apoio, o mural da escola e os uniformes em exposição logo na chegada.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Escadaria e porta -->
+<section class="scene" data-room="Escadaria e entrada">
+  <div class="stage">
+    <img src="img/tour/hall-2.jpg" alt="Escadaria de ferro forjado e porta de entrada principal" loading="lazy">
+    <div class="caption" data-caption>
+      <span class="room">02 · Escadaria e entrada</span>
+      <h2>Acesso principal</h2>
+      <p>A escadaria de ferro forjado e a porta de entrada, que dá acesso ao restante do prédio.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Biblioteca -->
+<section class="scene" data-room="Biblioteca">
+  <div class="stage">
+    <img src="img/tour/biblioteca-1.jpg" alt="Biblioteca com estantes de livros infantis e mesa redonda com cadeiras amarelas" loading="lazy">
+    <div class="caption" data-caption>
+      <span class="room">03 · Biblioteca</span>
+      <h2>Espaço de leitura</h2>
+      <p>Estantes com livros infantis, mesas redondas e cadeiras coloridas para as crianças.</p>
+    </div>
+  </div>
+</section>
+
+<section class="scene" data-room="Biblioteca">
+  <div class="stage">
+    <img src="img/tour/biblioteca-2.jpg" alt="Biblioteca com tapete verde, estantes de livros e janela em arco" loading="lazy">
+    <div class="caption" data-caption>
+      <span class="room">04 · Biblioteca</span>
+      <h2>Tapete e leitura</h2>
+      <p>Um tapete para sentar e ler, com estantes de livros ao redor e uma janela em arco.</p>
+    </div>
+  </div>
+</section>
+
+<section class="scene" data-room="Biblioteca">
+  <div class="stage">
+    <img src="img/tour/biblioteca-3.jpg" alt="Biblioteca com mesas, prateleiras e espaço de estudo" loading="lazy">
+    <div class="caption" data-caption>
+      <span class="room">05 · Biblioteca</span>
+      <h2>Estudo em grupo</h2>
+      <p>Mesas, prateleiras e um canto para estudar com calma, em grupo ou sozinho.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="outro">
+  <h2>Quer conhecer pessoalmente?</h2>
+  <p>Agende uma visita e veja o colégio de perto.</p>
+  <a class="btn" href="/">Voltar ao site</a>
+</footer>
+
+<script>
+(function () {
+  var scenes = Array.prototype.slice.call(document.querySelectorAll('.scene'));
+  var bar = document.getElementById('bar');
+  var counter = document.getElementById('counter');
+  var dotsWrap = document.getElementById('dots');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Create one dot per scene
+  scenes.forEach(function () {
+    var d = document.createElement('i');
+    dotsWrap.appendChild(d);
+  });
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function clamp(v, a, b) { return Math.min(b, Math.max(a, v)); }
+
+  var ticking = false;
+  function update() {
+    ticking = false;
+    var vh = window.innerHeight;
+    var doc = document.documentElement;
+    var maxScroll = doc.scrollHeight - vh;
+    bar.style.width = (maxScroll > 0 ? (window.scrollY / maxScroll) * 100 : 0) + '%';
+
+    var activeIndex = 0;
+    scenes.forEach(function (scene, i) {
+      var rect = scene.getBoundingClientRect();
+      var span = rect.height - vh;                       // distance the sticky stage travels
+      var p = span > 0 ? clamp(-rect.top / span, 0, 1) : 0; // 0 → 1 while crossing the scene
+
+      var img = scene.querySelector('img');
+      var cap = scene.querySelector('[data-caption]');
+
+      if (!reduce) {
+        // Slow horizontal drift plus a gentle zoom: feels like walking through the room
+        var x = (0.5 - p) * 8;                           // -4% .. +4%
+        var s = 1.12 + p * 0.06;                         // 1.12 → 1.18
+        img.style.transform = 'translate3d(' + x.toFixed(2) + '%,0,0) scale(' + s.toFixed(3) + ')';
+
+        // Caption fades in early, fades out late
+        var fadeIn = clamp(p / 0.2, 0, 1);
+        var fadeOut = clamp((1 - p) / 0.2, 0, 1);
+        var o = Math.min(fadeIn, fadeOut);
+        cap.style.opacity = o.toFixed(3);
+        cap.style.transform = 'translate3d(0,' + ((1 - o) * 18).toFixed(1) + 'px,0)';
+      } else {
+        cap.style.opacity = '1';
+      }
+
+      if (rect.top <= vh * 0.5 && rect.bottom >= vh * 0.5) activeIndex = i;
+    });
+
+    dots.forEach(function (d, i) { d.classList.toggle('on', i === activeIndex); });
+    counter.textContent = (activeIndex + 1) + ' / ' + scenes.length + ' · ' + scenes[activeIndex].getAttribute('data-room');
+  }
+
+  function onScroll() {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  update();
+})();
+</script>
+</body>
+</html>
