@@ -16,47 +16,48 @@ html,body{background:var(--ink)}
 body{font-family:'Outfit',system-ui,sans-serif;color:#fff;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 
-/* Um único palco fixo; a rolagem controla tudo */
 #track{position:relative}
 #viewport{position:fixed;inset:0;overflow:hidden;background:var(--ink)}
-.layer{position:absolute;inset:0;opacity:0;visibility:hidden;will-change:opacity}
+.layer{position:absolute;inset:0;opacity:0;visibility:hidden;will-change:opacity;pointer-events:none}
 .pan{position:absolute;left:0;top:0;height:100%;will-change:transform}
-.pan img{display:block;height:100%;width:100%;object-fit:cover;will-change:transform;user-select:none;-webkit-user-drag:none}
+.inner{position:absolute;inset:0;will-change:transform}
+.inner img{display:block;width:100%;height:100%;object-fit:cover;user-select:none;-webkit-user-drag:none}
 .shade{position:absolute;inset:0;pointer-events:none;
   background:linear-gradient(to top,rgba(4,18,61,.88) 0%,rgba(4,18,61,0) 42%),
              linear-gradient(to bottom,rgba(4,18,61,.5) 0%,rgba(4,18,61,0) 20%)}
 
-/* Pontos de destaque (acompanham a foto) */
-.hs{position:absolute;transform:translate(-50%,-50%);display:flex;align-items:center;gap:8px;white-space:nowrap}
-.hs b{width:16px;height:16px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 0 rgba(255,217,0,.7);animation:pulse 2s infinite;flex:none}
-.hs span{font-size:13px;font-weight:600;background:rgba(4,18,61,.78);padding:6px 11px;border-radius:999px;backdrop-filter:blur(4px)}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,217,0,.7)}70%{box-shadow:0 0 0 16px rgba(255,217,0,0)}100%{box-shadow:0 0 0 0 rgba(255,217,0,0)}}
+/* Pontos amarelos = passagens para outros ambientes */
+.hs{position:absolute;transform:translate(-21px,-50%);display:flex;align-items:center;gap:8px;white-space:nowrap;pointer-events:auto;padding:10px;margin:-10px}
+.hs.flip{flex-direction:row-reverse;transform:translate(calc(-100% + 21px),-50%)}
+.hs b{width:22px;height:22px;border-radius:50%;background:var(--gold);border:3px solid #fff;flex:none;animation:pulse 2s infinite}
+.hs span{font-size:15px;font-weight:700;background:var(--gold);color:var(--ink);padding:8px 14px;border-radius:999px;box-shadow:0 4px 14px rgba(0,0,0,.35)}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,217,0,.8)}70%{box-shadow:0 0 0 20px rgba(255,217,0,0)}100%{box-shadow:0 0 0 0 rgba(255,217,0,0)}}
 
-/* Legenda da sala */
 #cap{position:absolute;left:0;right:0;bottom:calc(9vh + env(safe-area-inset-bottom));padding:0 26px;max-width:780px;margin:0 auto;pointer-events:none;transition:opacity .35s,transform .35s}
 #cap .room{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:700}
 #cap h2{font-size:clamp(30px,5vw,56px);font-weight:800;letter-spacing:-.02em;line-height:1.05;margin:8px 0 10px}
 #cap p{font-size:clamp(15px,1.7vw,18px);color:#e3e9f8;line-height:1.55;max-width:560px}
 #cap.out{opacity:0;transform:translateY(14px)}
 
-/* HUD */
 #bar{position:fixed;top:0;left:0;height:3px;width:0;background:var(--gold);z-index:30}
-.hud{position:fixed;top:calc(14px + env(safe-area-inset-top));left:16px;right:16px;z-index:30;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.hud{position:fixed;top:calc(14px + env(safe-area-inset-top));left:16px;right:16px;z-index:30;display:flex;justify-content:space-between;gap:10px;align-items:center;pointer-events:none}
+.hud>*{pointer-events:auto}
 .pill{font-size:13px;font-weight:600;background:rgba(4,18,61,.62);padding:8px 14px;border-radius:999px;backdrop-filter:blur(6px);border:0;color:#fff;font-family:inherit;cursor:pointer}
-#hint{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:25;font-size:13px;letter-spacing:.08em;background:rgba(4,18,61,.7);padding:9px 16px;border-radius:999px;transition:opacity .5s;animation:bob 2s ease-in-out infinite}
+#hint{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:25;font-size:13px;letter-spacing:.08em;background:rgba(4,18,61,.7);padding:9px 16px;border-radius:999px;transition:opacity .5s;animation:bob 2s ease-in-out infinite;pointer-events:none}
 @keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,7px)}}
 
-/* Abertura e final */
 .cover{position:absolute;inset:0;z-index:20;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 24px;
   background:radial-gradient(120% 90% at 50% 0%,var(--navy) 0%,var(--ink) 72%);transition:opacity .6s}
 .cover .tag{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:700}
 .cover h1{font-size:clamp(34px,7vw,72px);font-weight:800;letter-spacing:-.02em;line-height:1.04;margin:16px 0 14px}
 .cover p{max-width:480px;color:#c9d2ec;font-size:17px;line-height:1.55;margin-bottom:28px}
+.cover h2{font-size:clamp(30px,5.5vw,54px);font-weight:800;letter-spacing:-.02em;margin:14px 0 24px}
 .btn{display:inline-block;background:var(--gold);color:var(--ink);font-weight:700;padding:15px 30px;border-radius:999px;font-size:16px;border:0;font-family:inherit;cursor:pointer}
-#intro{pointer-events:auto}
+.btn.ghost{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.4)}
+.btns{display:flex;flex-direction:column;gap:12px;align-items:center}
 #outro{opacity:0;pointer-events:none}
 #outro.on{pointer-events:auto}
-.cover h2{font-size:clamp(30px,5.5vw,54px);font-weight:800;letter-spacing:-.02em;margin-bottom:12px}
+#fade{position:fixed;inset:0;background:var(--ink);opacity:0;pointer-events:none;z-index:40;transition:opacity .42s}
 
 @media (prefers-reduced-motion:reduce){.hs b,#hint{animation:none}}
 </style>
@@ -79,153 +80,178 @@ a{color:inherit;text-decoration:none}
   <div class="cover" id="intro">
     <span class="tag">Tour virtual · teste</span>
     <h1>Entre no nosso colégio</h1>
-    <p>Role a tela para caminhar pelo hall de entrada e pela biblioteca, olhando ao redor de cada espaço.</p>
+    <p>Role a tela para caminhar. Toque nos pontos amarelos para entrar em outros ambientes.</p>
     <button class="btn" id="start">Entrar ↓</button>
   </div>
 
-  <div class="cover" id="outro">
-    <span class="tag">Fim do tour</span>
-    <h2>Quer conhecer pessoalmente?</h2>
-    <p>Agende uma visita e veja o colégio de perto.</p>
-    <a class="btn" href="/">Voltar ao site</a>
-  </div>
+  <div class="cover" id="outro"></div>
   <div id="hint">Role para caminhar ↓</div>
 </div>
-
+<div id="fade"></div>
 <div id="track"></div>
 
 <script>
 (function(){
-  /* fx, fy = ponto para onde "caminhamos" ao final da cena (fração da foto) */
-  var SCENES = [
-    {img:'img/tour/hall-1.jpg', ar:1800/1391, room:'01 · Hall de entrada', title:'Bem-vindo', text:'Bancos de apoio iluminados, o mural do colégio e os uniformes em exposição logo na chegada.', fx:.57, fy:.62, pan:[0,1],
-     hs:[['Mural do colégio',.30,.40],['Corredor para as salas',.60,.58],['Uniformes',.66,.68]]},
-    {img:'img/tour/hall-2.jpg', ar:1800/911, room:'02 · Escadaria', title:'Acesso principal', text:'A escadaria de ferro forjado, o portão de entrada e o corredor que leva às salas.', fx:.72, fy:.45, pan:[1,0],
-     hs:[['Porta de entrada',.20,.45],['Escadaria',.44,.50],['Corredor',.72,.45]]},
-    {img:'img/tour/biblioteca-1.jpg', ar:1800/1084, room:'03 · Biblioteca', title:'Espaço de leitura', text:'Estantes com livros infantis na altura das crianças, mesa redonda e cadeiras coloridas.', fx:.40, fy:.65, pan:[0,1],
-     hs:[['Livros ao alcance das crianças',.08,.62],['Janela em arco',.22,.42],['Mesa de leitura',.40,.72],['Cantinho de estudo',.88,.62]]},
-    {img:'img/tour/biblioteca-2.jpg', ar:1800/1084, room:'04 · Biblioteca', title:'Cantinho do tapete', text:'Um tapete verde para sentar e ler, rodeado de estantes e com uma janela em arco.', fx:.50, fy:.68, pan:[1,0],
-     hs:[['Estante de livros',.50,.55],['Tapete de leitura',.45,.78],['Janela em arco',.80,.50]]},
-    {img:'img/tour/biblioteca-3.jpg', ar:1800/982, room:'05 · Biblioteca', title:'Estudo e convivência', text:'Mesas, prateleiras e um canto de estudo, com puffs amarelos para ler com calma.', fx:.40, fy:.65, pan:[0,1],
-     hs:[['Mural',.37,.28],['Puffs de leitura',.62,.60],['Mesa redonda',.40,.70],['Cantinho de estudo',.84,.62]]}
-  ];
-  var N = SCENES.length, PER = 3.2;                 // 3,2 telas de rolagem por espaço
-  var viewport = document.getElementById('viewport'), layersEl = document.getElementById('layers');
-  var track = document.getElementById('track'), bar = document.getElementById('bar');
-  var cap = document.getElementById('cap'), count = document.getElementById('count');
-  var intro = document.getElementById('intro'), outro = document.getElementById('outro'), hint = document.getElementById('hint');
-  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* fx,fy = para onde "caminhamos" no fim da foto. links = [texto, ambiente, x, y] (frações da foto) */
+  var ROOMS = {
+    hall:{name:'Hall de entrada', end:[['Biblioteca','biblioteca'],['Pátio coberto','patio']], scenes:[
+      {img:'img/tour/hall-1.jpg', ar:1800/1391, title:'Bem-vindo', text:'Bancos de apoio iluminados, o mural do colégio e os uniformes em exposição logo na chegada.', fx:.57, fy:.62,
+       links:[['Biblioteca','biblioteca',.58,.58]]},
+      {img:'img/tour/hall-2.jpg', ar:1800/911, title:'Escadaria e entrada', text:'A escadaria de ferro forjado, o portão de entrada e o corredor que leva às salas.', fx:.72, fy:.46,
+       links:[['Pátio coberto','patio',.72,.46]]}
+    ]},
+    biblioteca:{name:'Biblioteca', end:[['Hall de entrada','hall']], scenes:[
+      {img:'img/tour/biblioteca-1.jpg', ar:1800/1157, title:'Espaço de leitura', text:'Estantes com livros infantis na altura das crianças, mesa redonda e cadeiras coloridas.', fx:.735, fy:.51,
+       links:[['Hall de entrada','hall',.735,.51]]},
+      {img:'img/tour/biblioteca-2.jpg', ar:1800/1084, title:'Cantinho do tapete', text:'Um tapete verde para sentar e ler, rodeado de estantes e com uma janela em arco.', fx:.50, fy:.68, links:[]},
+      {img:'img/tour/biblioteca-3.jpg', ar:1800/982, title:'Estudo e convivência', text:'Mesas, prateleiras e um canto de estudo, com puffs amarelos para ler com calma.', fx:.40, fy:.65, links:[]}
+    ]},
+    patio:{name:'Pátio coberto', end:[['Quadra','quadra'],['Hall de entrada','hall']], scenes:[
+      {img:'img/tour/patio-1.jpg', ar:1800/956, title:'Pátio coberto', text:'Uma cobertura translúcida deixa a luz natural entrar no centro do colégio.', fx:.50, fy:.50,
+       links:[['Hall de entrada','hall',.16,.50]]},
+      {img:'img/tour/patio-2.jpg', ar:1800/1234, title:'Espaço para circular', text:'Piso colorido com pista de trânsito para as crianças brincarem e se movimentarem.', fx:.22, fy:.58, links:[]},
+      {img:'img/tour/patio-3.jpg', ar:1800/1098, title:'Parquinho', text:'Brinquedos coloridos com escorregador, túnel e escada, no centro do pátio.', fx:.45, fy:.55, links:[]},
+      {img:'img/tour/patio-4.jpg', ar:1800/887, title:'Corredor das salas', text:'Salas com portas de madeira em arco ao redor do pátio e saída para a área externa.', fx:.79, fy:.40,
+       links:[['Quadra','quadra',.79,.40]]}
+    ]},
+    quadra:{name:'Quadra', end:[['Pátio coberto','patio']], scenes:[
+      {img:'img/tour/quadra-1.jpg', ar:1800/873, title:'Quadra e área externa', text:'Quadra com o brasão do colégio no centro, parquinho de madeira e áreas verdes.', fx:.66, fy:.66,
+       links:[['Pátio coberto','patio',.93,.60]]}
+    ]}
+  };
+
+  var PER = 3.2;
+  var layersEl=document.getElementById('layers'), track=document.getElementById('track'), bar=document.getElementById('bar');
+  var cap=document.getElementById('cap'), count=document.getElementById('count');
+  var intro=document.getElementById('intro'), outro=document.getElementById('outro'), hint=document.getElementById('hint'), fade=document.getElementById('fade');
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var cur=null, R=null, SCENES=[], N=0, offset=0, hasIntro=false, vw=0, vh=0, lastRoom=-1, busy=false;
+  if('scrollRestoration' in history) history.scrollRestoration='manual';
+
   function clamp(v,a,b){return Math.min(b,Math.max(a,v))}
   function ease(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2}
+  function keyFromHash(){var k=location.hash.replace('#',''); return ROOMS[k]?k:'hall'}
 
-  SCENES.forEach(function(s,i){
-    var L = document.createElement('div'); L.className='layer';
-    var pan = document.createElement('div'); pan.className='pan';
-    var im = new Image(); im.src = s.img; im.alt = s.title; im.decoding='async';
-    pan.appendChild(im);
-    s.hs.forEach(function(h){
-      var d = document.createElement('div'); d.className='hs';
-      d.style.left=(h[1]*100)+'%'; d.style.top=(h[2]*100)+'%';
-      d.innerHTML='<b></b><span>'+h[0]+'</span>';
-      pan.appendChild(d);
-    });
-    var sh = document.createElement('div'); sh.className='shade';
-    L.appendChild(pan); L.appendChild(sh); layersEl.appendChild(L);
-    s.L=L; s.el=pan; s.im=im;
-  });
-
-  var vw=0, vh=0;
-  function size(){
-    vw=innerWidth; vh=innerHeight;
-    track.style.height = (vh*(N*PER+1.6)) + 'px';
+  function build(key, skipIntro){
+    stopAuto();
+    cur=key; R=ROOMS[key]; SCENES=R.scenes; N=SCENES.length;
+    hasIntro=(key==='hall' && !skipIntro); offset=hasIntro?.3:0;
+    layersEl.innerHTML=''; lastRoom=-1;
     SCENES.forEach(function(s){
-      // largura da panorâmica: preenche a altura e sempre sobra pelo menos 35% para "olhar ao redor"
-      s.W = Math.max(vh*s.ar, vw*1.35);
-      s.el.style.width = s.W+'px';
+      var L=document.createElement('div'); L.className='layer';
+      var pan=document.createElement('div'); pan.className='pan';
+      var inner=document.createElement('div'); inner.className='inner';
+      var im=new Image(); im.src=s.img; im.alt=s.title; im.decoding='async';
+      im.onload=function(){ if(im.naturalWidth){ s.ar=im.naturalWidth/im.naturalHeight; size(); req(); } };
+      inner.appendChild(im);
+      s.links.forEach(function(l){
+        var a=document.createElement('a'); a.className='hs'+(l[2]>.8?' flip':''); a.href='#'+l[1];
+        a.style.left=(l[2]*100)+'%'; a.style.top=(l[3]*100)+'%';
+        a.setAttribute('aria-label','Ir para '+l[0]);
+        a.innerHTML='<b></b><span>'+l[0]+'</span>';
+        inner.appendChild(a);
+      });
+      pan.appendChild(inner);
+      var sh=document.createElement('div'); sh.className='shade';
+      L.appendChild(pan); L.appendChild(sh); layersEl.appendChild(L);
+      s.L=L; s.el=pan; s.inner=inner;
+      // a câmera termina no ponto amarelo da cena (se houver); senão, no ponto fx/fy
+      s.px=s.links.length?s.links[0][2]:s.fx; s.py=s.links.length?s.links[0][3]:s.fy;
     });
+    // tela final do ambiente
+    var btns=R.end.map(function(e){return '<a class="btn" href="#'+e[1]+'">'+(e[1]==='hall'?'← ':'')+e[0]+'</a>'}).join('');
+    outro.innerHTML='<span class="tag">Fim · '+R.name+'</span><h2>Para onde agora?</h2><div class="btns">'+btns+'<a class="btn ghost" href="/">Voltar ao site</a></div>';
+    // pré-carrega a primeira foto dos ambientes ligados
+    R.end.forEach(function(e){ new Image().src=ROOMS[e[1]].scenes[0].img });
+    window.scrollTo(0,0); size(); update();
   }
 
-  var lastRoom=-1;
+  function size(){
+    vw=innerWidth; vh=innerHeight;
+    track.style.height=(vh*(N*PER+offset+1.6))+'px';
+    SCENES.forEach(function(s){ s.W=Math.max(vh*s.ar, vw*1.35); s.el.style.width=s.W+'px'; });
+  }
+
   function setCaption(i){
     if(i===lastRoom) return; lastRoom=i;
     cap.classList.add('out');
     setTimeout(function(){
-      var s=SCENES[i]; if(!s) return;
-      cap.querySelector('.room').textContent=s.room;
+      var s=SCENES[i]; if(!s||lastRoom!==i) return;
+      cap.querySelector('.room').textContent=R.name;
       cap.querySelector('h2').textContent=s.title;
       cap.querySelector('p').textContent=s.text;
-      if(lastRoom===i) cap.classList.remove('out');
+      cap.classList.remove('out');
     },180);
   }
 
   var ticking=false;
   function update(){
-    ticking=false;
-    var max = track.offsetHeight - vh;
-    var g = max>0 ? clamp(scrollY/max,0,1) : 0;
-    bar.style.width=(g*100)+'%';
-
-    var total = N*PER, pos = clamp(scrollY/vh - .3, 0, total);   // ".3" = respiro no começo
-    var active = clamp(Math.floor(pos/PER),0,N-1);
+    ticking=false; if(!R) return;
+    var max=track.offsetHeight-vh;
+    bar.style.width=((max>0?clamp(scrollY/max,0,1):0)*100)+'%';
+    var total=N*PER, pos=clamp(scrollY/vh-offset,0,total);
+    var active=clamp(Math.floor(pos/PER),0,N-1);
 
     SCENES.forEach(function(s,i){
-      var t = (pos - i*PER)/PER;                                   // 0..1 dentro da cena
-      var vis = t>-.14 && t<1.14;
-      s.L.style.visibility = vis?'visible':'hidden';
+      var t=(pos-i*PER)/PER, vis=t>-.14&&t<1.14;
+      s.L.style.visibility=vis?'visible':'hidden';
       if(!vis) return;
-      // transparência: entra nos primeiros 12%, sai nos últimos 12%
-      var o = Math.min(clamp((t+.14)/.2,0,1), clamp((1.14-t)/.2,0,1));
-      s.L.style.opacity = o.toFixed(3);
-
-      // olhar ao redor: percorre a foto da esquerda p/ direita (ou o contrário)
-      var p = ease(clamp((t-.12)/.64,0,1));
-      var a=s.pan[0], b=s.pan[1];
-      var f = a + (b-a)*p;
-      var tx = -(s.W-vw)*f;
-      s.el.style.transform='translate3d('+tx.toFixed(1)+'px,0,0)';
-
-      // caminhar: chegada (zoom saindo) e saída (zoom entrando na direção do ponto focal)
+      var o=Math.min(clamp((t+.14)/.2,0,1),clamp((1.14-t)/.2,0,1));
+      s.L.style.opacity=o.toFixed(3);
+      // olhar ao redor: termina com o ponto de destino (fx) no centro da tela
+      var endF=clamp((s.px*s.W-vw*.5)/(s.W-vw),0,1), startF=endF<.5?1:0;
+      var p=ease(clamp((t-.12)/.64,0,1)), f=startF+(endF-startF)*p;
+      s.el.style.transform='translate3d('+(-(s.W-vw)*f).toFixed(1)+'px,0,0)';
+      // caminhar: chegada (zoom saindo) e saída (zoom entrando)
       var sc=1;
-      if(t<.12) sc = 1 + (clamp((.12-t)/.26,0,1))*.28;
-      else if(t>.78) sc = 1 + ease(clamp((t-.78)/.36,0,1))*.55;
-      var originX = (s.fx*s.W), originY=(s.fy*vh);
-      s.im.style.transformOrigin = originX.toFixed(0)+'px '+originY.toFixed(0)+'px';
-      s.im.style.transform = reduce?'none':'scale('+sc.toFixed(3)+')';
+      if(t<.12) sc=1+clamp((.12-t)/.26,0,1)*.28;
+      else if(t>.78) sc=1+ease(clamp((t-.78)/.36,0,1))*.55;
+      s.inner.style.transformOrigin=(s.px*s.W).toFixed(0)+'px '+(s.py*vh).toFixed(0)+'px';
+      s.inner.style.transform=reduce?'none':'scale('+sc.toFixed(3)+')';
     });
 
-    var inTour = pos>0.05 && pos<total-0.05;
-    intro.style.opacity = scrollY<vh*.2 ? 1 : 0; intro.style.pointerEvents = scrollY<vh*.2?'auto':'none';
-    var endOn = scrollY > vh*(N*PER+.3);
-    outro.style.opacity = endOn ? 1 : 0; outro.classList.toggle('on',endOn);
-    hint.style.opacity = (scrollY>vh*.2 && scrollY<vh*1.2) ? 1 : 0;
-    cap.style.display = (scrollY<vh*.2 || endOn)?'none':'block';
-    if(scrollY>=vh*.2 && !endOn){ setCaption(active); count.textContent=(active+1)+' / '+N; }
-    else count.textContent='Tour virtual';
+    var introOn=hasIntro&&scrollY<vh*.2;
+    intro.style.display=hasIntro?'flex':'none';
+    intro.style.opacity=introOn?1:0; intro.style.pointerEvents=introOn?'auto':'none';
+    var endOn=scrollY>vh*(total+offset+.3);
+    outro.style.opacity=endOn?1:0; outro.classList.toggle('on',endOn);
+    hint.style.opacity=(!introOn&&scrollY<vh*1.2&&!endOn)?1:0;
+    cap.style.display=(introOn||endOn)?'none':'block';
+    if(!introOn&&!endOn){ setCaption(active); count.textContent=R.name+' · '+(active+1)+'/'+N; }
+    else count.textContent=endOn?R.name:'Tour virtual';
   }
   function req(){ if(!ticking){ticking=true;requestAnimationFrame(update)} }
   addEventListener('scroll',req,{passive:true});
   addEventListener('resize',function(){size();req()});
-  size(); update();
 
   document.getElementById('start').onclick=function(){ scrollTo({top:vh*.6,behavior:'smooth'}) };
 
-  /* Passeio automático */
+  /* troca de ambiente com escurecimento */
+  addEventListener('hashchange',function(){
+    var k=keyFromHash(); if(k===cur||busy) return; busy=true;
+    fade.style.opacity=1;
+    setTimeout(function(){ build(k,true); requestAnimationFrame(function(){ fade.style.opacity=0; busy=false; }); },430);
+  });
+
+  /* passeio automático */
   var autoBtn=document.getElementById('auto'), raf=null, on=false;
   function step(){
     if(!on) return;
-    var max=track.offsetHeight-vh;
-    if(scrollY>=max-2){stop();return}
-    scrollBy(0, Math.max(1,vh*0.0032));
-    raf=requestAnimationFrame(step);
+    if(scrollY>=track.offsetHeight-vh-2){stopAuto();return}
+    scrollBy(0,Math.max(1,vh*0.0032)); raf=requestAnimationFrame(step);
   }
-  function stop(){on=false;autoBtn.textContent='▶ Passeio automático';cancelAnimationFrame(raf)}
+  function stopAuto(){on=false;autoBtn.textContent='▶ Passeio automático';cancelAnimationFrame(raf)}
   autoBtn.onclick=function(){
-    if(on){stop();return}
+    if(on){stopAuto();return}
     on=true;autoBtn.textContent='❚❚ Pausar';
     if(scrollY>=track.offsetHeight-vh-2) scrollTo(0,0);
     raf=requestAnimationFrame(step);
   };
-  ['wheel','touchstart','keydown'].forEach(function(e){addEventListener(e,function(){if(on)stop()},{passive:true})});
+  ['wheel','touchstart','keydown'].forEach(function(e){addEventListener(e,function(){if(on)stopAuto()},{passive:true})});
+
+  // abertura: sem hash = hall com a tela de boas-vindas; #biblioteca etc. abre direto no ambiente
+  var first=keyFromHash();
+  build(first, first!=='hall');
 })();
 </script>
 </body>
