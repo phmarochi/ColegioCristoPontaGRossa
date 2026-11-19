@@ -19,6 +19,7 @@ a{color:inherit;text-decoration:none}
 #track{position:relative;pointer-events:none}
 #viewport{position:fixed;inset:0;z-index:1;overflow:hidden;background:var(--ink)}
 .layer{position:absolute;inset:0;opacity:0;visibility:hidden;will-change:opacity;pointer-events:none}
+.bg{position:absolute;inset:-12%;background-size:cover;background-position:center;filter:blur(26px) brightness(.5) saturate(1.15)}
 .pan{position:absolute;left:0;top:0;height:100%;will-change:transform}
 .inner{position:absolute;inset:0;will-change:transform}
 .inner img{display:block;width:100%;height:100%;object-fit:cover;user-select:none;-webkit-user-drag:none}
@@ -110,13 +111,14 @@ a{color:inherit;text-decoration:none}
       {img:'img/tour/patio-1.jpg', ar:1800/956, title:'Pátio coberto', text:'Uma cobertura translúcida deixa a luz natural entrar no centro do colégio.', fx:.50, fy:.50,
        links:[['Hall de entrada','hall',.16,.50]]},
       {img:'img/tour/patio-2.jpg', ar:1800/1234, title:'Espaço para circular', text:'Piso colorido com pista de trânsito para as crianças brincarem e se movimentarem.', fx:.22, fy:.58, links:[]},
-      {img:'img/tour/patio-3.jpg', ar:1800/1098, title:'Parquinho', text:'Brinquedos coloridos com escorregador, túnel e escada, no centro do pátio.', fx:.45, fy:.55, links:[]},
-      {img:'img/tour/patio-4.jpg', ar:1800/887, title:'Corredor das salas', text:'Salas com portas de madeira em arco ao redor do pátio e saída para a área externa.', fx:.79, fy:.40,
-       links:[['Pátio descoberto','quadra',.79,.40]]}
+      {img:'img/tour/patio-3.jpg', ar:1800/1098, title:'Parquinho', text:'Brinquedos coloridos no centro do pátio. Ao fundo do corredor, a passagem para o pátio descoberto.', fx:.81, fy:.36,
+       links:[['Pátio descoberto','quadra',.81,.36]]},
+      {img:'img/tour/patio-4.jpg', ar:1800/887, title:'Corredor das salas', text:'Salas com portas de madeira em arco ao redor do pátio. No fim do corredor, a saída para o pátio descoberto.', fx:.24, fy:.36,
+       links:[['Pátio descoberto','quadra',.24,.36]]}
     ]},
     quadra:{name:'Pátio descoberto', end:[['Pátio coberto','patio']], scenes:[
       {img:'img/tour/quadra-1.jpg', ar:1800/873, title:'Área externa', text:'Quadra com o brasão do colégio no centro, parquinho de madeira e áreas verdes.', fx:.66, fy:.66,
-       links:[['Pátio coberto','patio',.93,.60]]}
+       links:[['Pátio coberto','patio',.82,.90]]}
     ]}
   };
 
@@ -141,6 +143,7 @@ a{color:inherit;text-decoration:none}
     layersEl.innerHTML=''; lastRoom=-1;
     SCENES.forEach(function(s){
       var L=document.createElement('div'); L.className='layer';
+      var bg=document.createElement('div'); bg.className='bg'; bg.style.backgroundImage='url('+s.img+')'; L.appendChild(bg);
       var pan=document.createElement('div'); pan.className='pan';
       var inner=document.createElement('div'); inner.className='inner';
       var im=new Image(); im.src=s.img; im.alt=s.title; im.decoding='async';
@@ -177,7 +180,21 @@ a{color:inherit;text-decoration:none}
   function size(){
     vw=innerWidth; vh=innerHeight;
     track.style.height=(vh*(N*PER+offset+1.6))+'px';
-    SCENES.forEach(function(s){ s.W=Math.max(vh*s.ar, vw*1.35); s.el.style.width=s.W+'px'; });
+    var portrait=vw<vh;
+    SCENES.forEach(function(s){
+      var W,h;
+      if(portrait){
+        // celular: afasta bem a câmera — ~60% da foto fica visível de uma vez, o resto aparece ao "olhar ao redor"
+        W=Math.min(vw*1.7, vh*.66*s.ar); h=W/s.ar;
+        s.top=vh*.40-h/2;                      // centralizada entre o topo e a legenda
+      }else{
+        h=vh*.92; W=h*s.ar;
+        if(W<vw*1.12){ W=vw*1.12; h=Math.min(W/s.ar,vh); }
+        s.top=(vh-h)/2;
+      }
+      s.W=W; s.h=h;
+      s.el.style.width=W+'px'; s.el.style.height=h+'px'; s.el.style.top=s.top+'px';
+    });
   }
 
   function setCaption(i){
@@ -223,9 +240,9 @@ a{color:inherit;text-decoration:none}
       s.el.style.transform='translate3d('+(-(s.W-vw)*f).toFixed(1)+'px,0,0)';
       // caminhar: chegada (zoom saindo) e saída (zoom entrando)
       var sc=1;
-      if(t<.12) sc=1+clamp((.12-t)/.26,0,1)*.28;
-      else if(t>.78) sc=1+ease(clamp((t-.78)/.36,0,1))*.55;
-      s.inner.style.transformOrigin=(s.px*s.W).toFixed(0)+'px '+(s.py*vh).toFixed(0)+'px';
+      if(t<.12) sc=1+clamp((.12-t)/.26,0,1)*.10;
+      else if(t>.78) sc=1+ease(clamp((t-.78)/.36,0,1))*.28;
+      s.inner.style.transformOrigin=(s.px*s.W).toFixed(0)+'px '+(s.py*s.h).toFixed(0)+'px';
       s.inner.style.transform=reduce?'none':'scale('+sc.toFixed(3)+')';
     });
 
