@@ -96,9 +96,9 @@ a{color:inherit;text-decoration:none}
   var ROOMS = {
     hall:{name:'Hall de entrada', end:[['Biblioteca','biblioteca'],['Pátio coberto','patio']], scenes:[
       {img:'img/tour/hall-1.jpg', ar:1800/1391, title:'Bem-vindo', text:'Bancos de apoio iluminados, o mural do colégio e os uniformes em exposição logo na chegada.', fx:.57, fy:.62,
-       links:[['Biblioteca','biblioteca',.58,.58]]},
+       links:[['Biblioteca','biblioteca',.505,.47],['Pátio coberto','patio',.675,.60]]},
       {img:'img/tour/hall-2.jpg', ar:1800/911, title:'Escadaria e entrada', text:'A escadaria de ferro forjado, o portão de entrada e o corredor que leva às salas.', fx:.72, fy:.46,
-       links:[['Pátio coberto','patio',.72,.46]]}
+       links:[]}
     ]},
     biblioteca:{name:'Biblioteca', end:[['Hall de entrada','hall']], scenes:[
       {img:'img/tour/biblioteca-1.jpg', ar:1800/1157, title:'Espaço de leitura', text:'Estantes com livros infantis na altura das crianças, mesa redonda e cadeiras coloridas.', fx:.735, fy:.51,
@@ -106,25 +106,27 @@ a{color:inherit;text-decoration:none}
       {img:'img/tour/biblioteca-2.jpg', ar:1800/1084, title:'Cantinho do tapete', text:'Um tapete verde para sentar e ler, rodeado de estantes e com uma janela em arco.', fx:.50, fy:.68, links:[]},
       {img:'img/tour/biblioteca-3.jpg', ar:1800/982, title:'Estudo e convivência', text:'Mesas, prateleiras e um canto de estudo, com puffs amarelos para ler com calma.', fx:.40, fy:.65, links:[]}
     ]},
-    patio:{name:'Pátio coberto', end:[['Quadra','quadra'],['Hall de entrada','hall']], scenes:[
+    patio:{name:'Pátio coberto', end:[['Pátio descoberto','quadra'],['Hall de entrada','hall']], scenes:[
       {img:'img/tour/patio-1.jpg', ar:1800/956, title:'Pátio coberto', text:'Uma cobertura translúcida deixa a luz natural entrar no centro do colégio.', fx:.50, fy:.50,
        links:[['Hall de entrada','hall',.16,.50]]},
       {img:'img/tour/patio-2.jpg', ar:1800/1234, title:'Espaço para circular', text:'Piso colorido com pista de trânsito para as crianças brincarem e se movimentarem.', fx:.22, fy:.58, links:[]},
       {img:'img/tour/patio-3.jpg', ar:1800/1098, title:'Parquinho', text:'Brinquedos coloridos com escorregador, túnel e escada, no centro do pátio.', fx:.45, fy:.55, links:[]},
       {img:'img/tour/patio-4.jpg', ar:1800/887, title:'Corredor das salas', text:'Salas com portas de madeira em arco ao redor do pátio e saída para a área externa.', fx:.79, fy:.40,
-       links:[['Quadra','quadra',.79,.40]]}
+       links:[['Pátio descoberto','quadra',.79,.40]]}
     ]},
-    quadra:{name:'Quadra', end:[['Pátio coberto','patio']], scenes:[
-      {img:'img/tour/quadra-1.jpg', ar:1800/873, title:'Quadra e área externa', text:'Quadra com o brasão do colégio no centro, parquinho de madeira e áreas verdes.', fx:.66, fy:.66,
+    quadra:{name:'Pátio descoberto', end:[['Pátio coberto','patio']], scenes:[
+      {img:'img/tour/quadra-1.jpg', ar:1800/873, title:'Área externa', text:'Quadra com o brasão do colégio no centro, parquinho de madeira e áreas verdes.', fx:.66, fy:.66,
        links:[['Pátio coberto','patio',.93,.60]]}
     ]}
   };
 
   var PER = 3.2;
+  var NEXT = {hall:'biblioteca', biblioteca:'patio', patio:'quadra', quadra:null};   // ordem do passeio automático
   var layersEl=document.getElementById('layers'), track=document.getElementById('track'), bar=document.getElementById('bar');
   var cap=document.getElementById('cap'), count=document.getElementById('count');
   var intro=document.getElementById('intro'), outro=document.getElementById('outro'), hint=document.getElementById('hint'), fade=document.getElementById('fade');
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var cd=null, cdLeft=0, stay=false, autoWanted=false;
   var cur=null, R=null, SCENES=[], N=0, offset=0, hasIntro=false, vw=0, vh=0, lastRoom=-1, busy=false;
   if('scrollRestoration' in history) history.scrollRestoration='manual';
 
@@ -145,7 +147,7 @@ a{color:inherit;text-decoration:none}
       im.onload=function(){ if(im.naturalWidth){ s.ar=im.naturalWidth/im.naturalHeight; size(); req(); } };
       inner.appendChild(im);
       s.links.forEach(function(l){
-        var a=document.createElement('a'); a.className='hs'+(l[2]>.8?' flip':''); a.href='#'+l[1];
+        var a=document.createElement('a'); a.className='hs'+(l[2]>.62?' flip':''); a.href='#'+l[1];
         a.style.left=(l[2]*100)+'%'; a.style.top=(l[3]*100)+'%';
         a.setAttribute('aria-label','Ir para '+l[0]);
         a.innerHTML='<b></b><span>'+l[0]+'</span>';
@@ -156,14 +158,20 @@ a{color:inherit;text-decoration:none}
       L.appendChild(pan); L.appendChild(sh); layersEl.appendChild(L);
       s.L=L; s.el=pan; s.inner=inner;
       // a câmera termina no ponto amarelo da cena (se houver); senão, no ponto fx/fy
-      s.px=s.links.length?s.links[0][2]:s.fx; s.py=s.links.length?s.links[0][3]:s.fy;
+      s.px=s.links.length?s.links.reduce(function(a,l){return a+l[2]},0)/s.links.length:s.fx; s.py=s.links.length?s.links.reduce(function(a,l){return a+l[3]},0)/s.links.length:s.fy;
     });
-    // tela final do ambiente
-    var btns=R.end.map(function(e){return '<a class="btn" href="#'+e[1]+'">'+(e[1]==='hall'?'← ':'')+e[0]+'</a>'}).join('');
-    outro.innerHTML='<span class="tag">Fim · '+R.name+'</span><h2>Para onde agora?</h2><div class="btns">'+btns+'<a class="btn ghost" href="/">Voltar ao site</a></div>';
+    // tela final do ambiente: segue sozinho para o próximo espaço (a não ser que a pessoa fique)
+    var nx=NEXT[key], others=R.end.filter(function(e){return e[1]!==nx});
+    var oth=others.map(function(e){return '<a class="btn ghost" href="#'+e[1]+'">'+(e[1]==='hall'?'← ':'')+e[0]+'</a>'}).join('');
+    outro.innerHTML = nx
+      ? '<span class="tag">Fim · '+R.name+'</span><h2>Próximo: '+ROOMS[nx].name+'</h2><p id="cd" style="margin:-8px 0 22px"></p><div class="btns"><a class="btn" href="#'+nx+'">Ir agora →</a><button class="btn ghost" id="stay">Ficar aqui</button>'+oth+'<a class="btn ghost" href="/">Voltar ao site</a></div>'
+      : '<span class="tag">Fim do tour</span><h2>Obrigado pela visita!</h2><div class="btns">'+R.end.map(function(e){return '<a class="btn" href="#'+e[1]+'">'+(e[1]==='hall'?'← ':'')+e[0]+'</a>'}).join('')+'<a class="btn ghost" href="/">Voltar ao site</a></div>';
+    var st=document.getElementById('stay'); if(st) st.onclick=function(){ stay=true; cancelCount(); var c=document.getElementById('cd'); if(c) c.textContent='Passeio pausado neste ambiente.'; };
+    stay=false; cancelCount();
     // pré-carrega a primeira foto dos ambientes ligados
     R.end.forEach(function(e){ new Image().src=ROOMS[e[1]].scenes[0].img });
     window.scrollTo(0,0); size(); update();
+    if(autoWanted) setTimeout(function(){ if(autoWanted) startAuto() },700);
   }
 
   function size(){
@@ -182,6 +190,17 @@ a{color:inherit;text-decoration:none}
       cap.querySelector('p').textContent=s.text;
       cap.classList.remove('out');
     },180);
+  }
+
+  function renderCd(){ var c=document.getElementById('cd'); if(c) c.textContent='Seguindo em '+cdLeft+' s…'; }
+  function cancelCount(){ if(cd){clearInterval(cd);cd=null} }
+  function startCount(){
+    if(cd||stay||!NEXT[cur]) return;
+    cdLeft=autoWanted?3:5; renderCd();
+    cd=setInterval(function(){
+      cdLeft--;
+      if(cdLeft<=0){ cancelCount(); location.hash=NEXT[cur]; } else renderCd();
+    },1000);
   }
 
   var ticking=false;
@@ -215,6 +234,7 @@ a{color:inherit;text-decoration:none}
     intro.style.opacity=introOn?1:0; intro.style.pointerEvents=introOn?'auto':'none';
     var endOn=scrollY>vh*(total+offset+.3);
     outro.style.opacity=endOn?1:0; outro.classList.toggle('on',endOn);
+    if(endOn) startCount(); else { cancelCount(); stay=false; }
     hint.style.opacity=(!introOn&&scrollY<vh*1.2&&!endOn)?1:0;
     cap.style.display=(introOn||endOn)?'none':'block';
     if(!introOn&&!endOn){ setCaption(active); count.textContent=R.name+' · '+(active+1)+'/'+N; }
@@ -233,21 +253,23 @@ a{color:inherit;text-decoration:none}
     setTimeout(function(){ build(k,true); requestAnimationFrame(function(){ fade.style.opacity=0; busy=false; }); },430);
   });
 
-  /* passeio automático */
+  /* passeio automático (continua de um ambiente para o outro) */
   var autoBtn=document.getElementById('auto'), raf=null, on=false;
   function step(){
     if(!on) return;
-    if(scrollY>=track.offsetHeight-vh-2){stopAuto();return}
+    if(scrollY>=track.offsetHeight-vh-2){ on=false; cancelAnimationFrame(raf); return }   // espera a contagem do próximo ambiente
     scrollBy(0,Math.max(1,vh*0.0032)); raf=requestAnimationFrame(step);
   }
-  function stopAuto(){on=false;autoBtn.textContent='▶ Passeio automático';cancelAnimationFrame(raf)}
+  function startAuto(){ on=true; autoBtn.textContent='❚❚ Pausar'; cancelAnimationFrame(raf); raf=requestAnimationFrame(step) }
+  function stopAuto(){ on=false; autoBtn.textContent=autoWanted?'❚❚ Pausar':'▶ Passeio automático'; cancelAnimationFrame(raf) }
+  function pauseAuto(){ autoWanted=false; on=false; autoBtn.textContent='▶ Passeio automático'; cancelAnimationFrame(raf) }
   autoBtn.onclick=function(){
-    if(on){stopAuto();return}
-    on=true;autoBtn.textContent='❚❚ Pausar';
+    if(autoWanted){ pauseAuto(); return }
+    autoWanted=true; stay=false;
     if(scrollY>=track.offsetHeight-vh-2) scrollTo(0,0);
-    raf=requestAnimationFrame(step);
+    startAuto();
   };
-  ['wheel','touchstart','keydown'].forEach(function(e){addEventListener(e,function(){if(on)stopAuto()},{passive:true})});
+  ['wheel','touchstart','keydown'].forEach(function(e){addEventListener(e,function(){ if(autoWanted) pauseAuto() },{passive:true})});
 
   // abertura: sem hash = hall com a tela de boas-vindas; #biblioteca etc. abre direto no ambiente
   var first=keyFromHash();
